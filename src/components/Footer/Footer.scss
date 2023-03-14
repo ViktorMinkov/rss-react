@@ -1,0 +1,31 @@
+.footer {
+  background-color: rgb(70, 79, 88);
+  color: white;
+  font-size: 2rem;
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  &__github-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease-in;
+    &:hover {
+      color: tomato;
+    }
+  }
+  &__rs-logo {
+    width: 80px;
+    height: 40px;
+    background-image: url('/src/assets/rs_school.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: transform 0.3s ease-in;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}

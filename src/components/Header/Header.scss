@@ -1,0 +1,36 @@
+.header {
+  background-color: rgb(70, 79, 88);
+  color: white;
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    align-items: center;
+  }
+  &__logo {
+    font-size: 3rem;
+  }
+  &__nav {
+    display: flex;
+    font-size: 1.8rem;
+  }
+}
+.nav {
+  &__list {
+    display: flex;
+    gap: 10px;
+    list-style: none;
+  }
+  &__link {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease-in;
+    &:hover {
+      color: tomato;
+    }
+    &.active {
+      border-bottom: 2px solid tomato;
+      color: tomato;
+    }
+  }
+}
