@@ -7,13 +7,11 @@ class Footer extends React.Component {
       <footer className="footer">
         <div className="footer__container container">
           <a
-            className="footer__github-link"
+            className="footer__github"
             href="https://github.com/ViktorMinkov"
             target="_blank"
             rel="noreferrer"
-          >
-            Viktor Minkov
-          </a>
+          ></a>
           <div className="footer__year">© 2022</div>
           <a
             className="footer__rs-logo"

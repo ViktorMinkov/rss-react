@@ -8,13 +8,16 @@
     align-items: center;
     padding: 10px 20px;
   }
-  &__github-link {
+  &__github {
     display: block;
-    text-decoration: none;
-    color: inherit;
-    transition: color 0.3s ease-in;
+    width: 40px;
+    height: 40px;
+    background-image: url('/src/assets/github-icon.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: transform 0.3s ease-in;
     &:hover {
-      color: tomato;
+      transform: scale(1.05);
     }
   }
   &__rs-logo {

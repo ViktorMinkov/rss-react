@@ -49,3 +49,11 @@
     }
   }
 }
+
+@media (max-width: 680px) {
+  .search {
+    &__input {
+      width: 200px;
+    }
+  }
+}
