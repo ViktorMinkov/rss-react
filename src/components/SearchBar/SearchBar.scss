@@ -1,0 +1,51 @@
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  &__block {
+    position: relative;
+  }
+  &__input {
+    outline: none;
+    height: 32px;
+    border: 1px solid rgb(70, 79, 88);
+    border-radius: 5px;
+    padding-left: 30px;
+    font-size: 1.8rem;
+    &:focus {
+      border-color: tomato;
+    }
+    &:focus + .search__icon {
+      background-image: url('/src/assets/search-icon-tomato.svg');
+    }
+    &:focus::placeholder {
+      color: tomato;
+    }
+  }
+  &__icon {
+    position: absolute;
+    top: 6px;
+    left: 5px;
+    background-image: url('/src/assets/search-icon.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+  }
+  &__btn {
+    font-size: 1.8rem;
+    background-color: transparent;
+    color: black;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    height: 32px;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+    &:hover {
+      color: tomato;
+      border-color: tomato;
+    }
+  }
+}

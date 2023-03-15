@@ -3,7 +3,7 @@ import './About.scss';
 
 class About extends React.Component {
   render() {
-    return <h1 className="about">About Page</h1>;
+    return <div className="about">About Page</div>;
   }
 }
 
