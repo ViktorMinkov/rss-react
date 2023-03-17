@@ -1,6 +1,8 @@
 .about {
   padding: 20px;
-  font-size: 2rem;
   display: flex;
   justify-content: center;
+  &__title {
+    font-size: 3rem;
+  }
 }

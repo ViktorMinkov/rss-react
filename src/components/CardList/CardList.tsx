@@ -1,10 +1,15 @@
 import Card from 'components/Card';
 import React from 'react';
-import data from 'utils/data';
+import { ICard } from 'types';
 import './CardList.scss';
 
-class CardList extends React.Component {
+type CardListProps = {
+  data: ICard[];
+};
+
+class CardList extends React.Component<CardListProps> {
   render() {
+    const { data } = this.props;
     return (
       <>
         {data.length > 0 ? (

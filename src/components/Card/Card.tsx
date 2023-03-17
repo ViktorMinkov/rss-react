@@ -11,7 +11,9 @@ class Card extends React.Component<CardProps> {
     const { character } = this.props;
     return (
       <div className="card">
-        <div className="card__image" style={{ backgroundImage: `url(${character.image})` }}></div>
+        <div className="card__image-wrapper">
+          <img className="card__image" src={character.image} alt={character.name} />
+        </div>
         <h3 className="card__name">{character.name}</h3>
         <div className="card__content">
           <div className="card__species">Species: {character.species}</div>

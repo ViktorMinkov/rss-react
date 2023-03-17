@@ -16,7 +16,7 @@ class Header extends React.Component<HeaderProps> {
     return (
       <header className="header">
         <div className="header__container container">
-          <div className="header__logo">{this.props.title}</div>
+          <h2 className="header__logo">{this.props.title}</h2>
           <nav className="header__nav nav">
             <ul className="nav__list">
               {links.map((link, index) => (
