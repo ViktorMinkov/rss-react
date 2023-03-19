@@ -6,7 +6,7 @@ import Footer from './Footer';
 describe('Footer test', () => {
   test('render Footer component', () => {
     render(<Footer />);
-    expect(screen.getByText(/2022/i)).toBeInTheDocument();
+    expect(screen.getByText(/2023/i)).toBeInTheDocument();
     expect(screen.getAllByRole('link').length).toBe(2);
   });
 });

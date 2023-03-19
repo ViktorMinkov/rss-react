@@ -30,7 +30,6 @@ class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
 
   handleFormSumbit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    this.setState({ searchString: '' });
   };
 
   render() {

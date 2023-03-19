@@ -12,7 +12,7 @@ class Footer extends React.Component {
             target="_blank"
             rel="noreferrer"
           ></a>
-          <div className="footer__year">© 2022</div>
+          <div className="footer__year">© 2023</div>
           <a
             className="footer__rs-logo"
             href="https://rs.school/react/"
