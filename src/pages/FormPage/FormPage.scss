@@ -1,0 +1,23 @@
+.form-page {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  &__title {
+    font-size: 3rem;
+    text-align: center;
+  }
+  &__cards {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-top: 1px solid black;
+    padding: 5px;
+    &_empty {
+      text-align: center;
+      font-size: 2rem;
+    }
+  }
+}

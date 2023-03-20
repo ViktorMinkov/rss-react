@@ -9,6 +9,7 @@ type CardProps = {
 class Card extends React.Component<CardProps> {
   render() {
     const { character } = this.props;
+    const date = new Date(character.created);
     return (
       <div className="card">
         <div className="card__image-wrapper">
@@ -19,6 +20,7 @@ class Card extends React.Component<CardProps> {
           <div className="card__species">Species: {character.species}</div>
           <div className="card__status">Status: {character.status}</div>
           <div className="card__gender">Gender: {character.gender}</div>
+          <div className="card__gender">Created: {date.toLocaleDateString()}</div>
           <div className="card__favourite"></div>
         </div>
       </div>

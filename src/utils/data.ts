@@ -1,4 +1,6 @@
-const data = [
+import { ICard } from 'types';
+
+const data: ICard[] = [
   {
     id: 1,
     name: 'Rick Sanchez',
@@ -15,6 +17,7 @@ const data = [
       url: 'https://rickandmortyapi.com/api/location/3',
     },
     image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+    created: '2017-11-04T19:59:20.523Z',
   },
   {
     id: 2,
@@ -32,6 +35,7 @@ const data = [
       url: 'https://rickandmortyapi.com/api/location/3',
     },
     image: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg',
+    created: '2017-11-04T19:59:20.523Z',
   },
   {
     id: 3,
@@ -49,6 +53,7 @@ const data = [
       url: 'https://rickandmortyapi.com/api/location/20',
     },
     image: 'https://rickandmortyapi.com/api/character/avatar/3.jpeg',
+    created: '2017-11-04T19:59:20.523Z',
   },
   {
     id: 4,
@@ -66,6 +71,7 @@ const data = [
       url: 'https://rickandmortyapi.com/api/location/20',
     },
     image: 'https://rickandmortyapi.com/api/character/avatar/4.jpeg',
+    created: '2017-11-04T19:59:20.523Z',
   },
   {
     id: 5,
@@ -83,6 +89,7 @@ const data = [
       url: 'https://rickandmortyapi.com/api/location/20',
     },
     image: 'https://rickandmortyapi.com/api/character/avatar/5.jpeg',
+    created: '2017-11-04T19:59:20.523Z',
   },
   {
     id: 6,
@@ -100,6 +107,7 @@ const data = [
       url: 'https://rickandmortyapi.com/api/location/2',
     },
     image: 'https://rickandmortyapi.com/api/character/avatar/6.jpeg',
+    created: '2017-11-04T19:59:20.523Z',
   },
   {
     id: 7,

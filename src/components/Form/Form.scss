@@ -1,0 +1,46 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 1.8rem;
+  width: 300px;
+  margin: 0 auto;
+  padding: 5px;
+  &__input-wrapper {
+    display: flex;
+    flex-direction: column;
+    &-gender {
+      flex-direction: row;
+      gap: 10px;
+      align-items: center;
+    }
+  }
+  &__input {
+    outline: none;
+    border: 1px solid;
+    border-radius: 5px;
+    height: 25px;
+    &-image {
+      border: none;
+      height: auto;
+      border-radius: 0;
+    }
+  }
+  &__radio-wrapper {
+    display: flex;
+    gap: 10px;
+  }
+  &__radio {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  &__btn {
+    width: 100px;
+    font-size: 2rem;
+    align-self: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+  }
+}
