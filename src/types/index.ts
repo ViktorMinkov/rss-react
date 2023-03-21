@@ -3,13 +3,13 @@ export interface ICard {
   name: string;
   status: string;
   species: string;
-  type: string;
+  type?: string;
   gender: string;
-  origin: {
+  origin?: {
     name: string;
     url: string;
   };
-  location: {
+  location?: {
     name: string;
     url: string;
   };

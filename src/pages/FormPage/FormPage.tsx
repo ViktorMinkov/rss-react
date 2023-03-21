@@ -1,4 +1,4 @@
-import Card from 'components/Card';
+import CardList from 'components/CardList';
 import Form from 'components/Form';
 import React from 'react';
 import { ICard } from 'types';
@@ -16,18 +16,21 @@ class FormPage extends React.Component<FormPageProps, FormPageState> {
       characters: [],
     };
   }
+
+  createCharacter(character: ICard) {
+    this.setState((state: FormPageState) => ({
+      characters: [...state.characters, character],
+    }));
+  }
+
   render() {
     const { characters } = this.state;
     return (
       <div className="form-page">
         <h1 className="form-page__title">Form page</h1>
-        <Form />
+        <Form createCharacter={(character: ICard) => this.createCharacter(character)} />
         <div className="form-page__cards">
-          {characters.length > 0 ? (
-            characters.map((character, index) => <Card key={index} character={character} />)
-          ) : (
-            <div className="form-page__cards_empty">No data...</div>
-          )}
+          <CardList data={characters} />
         </div>
       </div>
     );

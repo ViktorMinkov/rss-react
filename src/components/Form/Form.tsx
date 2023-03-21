@@ -1,7 +1,10 @@
 import React from 'react';
+import { ICard } from 'types';
 import './Form.scss';
 
-type FormProps = Record<string, never>;
+type FormProps = {
+  createCharacter: (character: ICard) => void;
+};
 interface FormState {
   name: { valid: boolean; focus: boolean };
   gender: { valid: boolean; focus: boolean };
@@ -28,6 +31,7 @@ class Form extends React.Component<FormProps, FormState> {
   inputDateRef: React.RefObject<HTMLInputElement>;
   inputImageRef: React.RefObject<HTMLInputElement>;
   inputAgreementRef: React.RefObject<HTMLInputElement>;
+  formRef: React.RefObject<HTMLFormElement>;
 
   constructor(props: FormProps) {
     super(props);
@@ -39,6 +43,7 @@ class Form extends React.Component<FormProps, FormState> {
     this.inputDateRef = React.createRef();
     this.inputImageRef = React.createRef();
     this.inputAgreementRef = React.createRef();
+    this.formRef = React.createRef();
     this.state = {
       name: { valid: false, focus: false },
       gender: { valid: false, focus: false },
@@ -58,7 +63,7 @@ class Form extends React.Component<FormProps, FormState> {
   }
 
   validateName = () => {
-    const nameRegexp = /^[A-Z]/;
+    const nameRegexp = /^[A-ZА-Я]/;
     if (this.inputNameRef && this.inputNameRef.current) {
       const { value } = this.inputNameRef.current;
       if (value.length > 0 && value.match(nameRegexp)) {
@@ -158,8 +163,40 @@ class Form extends React.Component<FormProps, FormState> {
     const newState = this.validateForm();
     if (Object.values(newState).every(({ valid, focus }) => valid && focus)) {
       console.log('create cards');
+      const name = this.inputNameRef.current?.value || '';
+      const status = this.inputStatusRef.current?.value || 'Alive';
+      const species = this.inputSpeciesRef.current?.value || 'Human';
+      const created = this.inputDateRef.current?.value || '';
+      let image = '';
+      if (this.inputImageRef.current && this.inputImageRef.current.files) {
+        image = URL.createObjectURL(this.inputImageRef.current.files[0]);
+      }
+      let gender = '';
+      if (this.inputMaleRef.current && this.inputFemaleRef.current) {
+        if (this.inputMaleRef.current.checked) {
+          gender = this.inputMaleRef.current.value;
+        }
+        if (this.inputFemaleRef.current.checked) {
+          gender = this.inputFemaleRef.current.value;
+        }
+      }
+      const newCharacter = {
+        id: Date.now(),
+        name,
+        status,
+        species,
+        gender,
+        created,
+        image,
+      };
+      this.props.createCharacter(newCharacter);
+      this.resetForm();
     }
     this.setState({ ...this.state, ...newState });
+  };
+
+  resetForm = () => {
+    this.formRef.current && this.formRef.current.reset();
   };
 
   render() {
@@ -180,7 +217,7 @@ class Form extends React.Component<FormProps, FormState> {
       // inputAgreementValid,
     } = this.state;
     return (
-      <form className="form-page__form form" onSubmit={this.sumbitForm}>
+      <form className="form-page__form form" onSubmit={this.sumbitForm} ref={this.formRef}>
         <div className="form__input-wrapper">
           <div className="form__title">Full name:</div>
           <input
@@ -201,7 +238,7 @@ class Form extends React.Component<FormProps, FormState> {
                   className="form__input"
                   type="radio"
                   name="gender"
-                  value="male"
+                  value="Male"
                   ref={this.inputMaleRef}
                 />
               </div>
@@ -211,7 +248,7 @@ class Form extends React.Component<FormProps, FormState> {
                   className="form__input"
                   type="radio"
                   name="gender"
-                  value="female"
+                  value="Female"
                   ref={this.inputFemaleRef}
                 />
               </div>
@@ -222,17 +259,17 @@ class Form extends React.Component<FormProps, FormState> {
         <div className="form__input-wrapper">
           <div className="form__title">Species:</div>
           <select className="form__input" name="species" id="species" ref={this.inputSpeciesRef}>
-            <option value="human">Human</option>
-            <option value="alien">Alien</option>
-            <option value="robot">Robot</option>
+            <option value="Human">Human</option>
+            <option value="Alien">Alien</option>
+            <option value="Robot">Robot</option>
           </select>
           {!species.valid && species.focus && <div className="form__error">field is required</div>}
         </div>
         <div className="form__input-wrapper">
           <div className="form__title">Status:</div>
           <select className="form__input" name="status" id="status" ref={this.inputStatusRef}>
-            <option value="alive">Alive</option>
-            <option value="dead">Dead</option>
+            <option value="Alive">Alive</option>
+            <option value="Dead">Dead</option>
           </select>
           {!status.valid && status.focus && <div className="form__error">field is required</div>}
         </div>
