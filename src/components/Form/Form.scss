@@ -5,14 +5,16 @@
   font-size: 1.8rem;
   width: 300px;
   margin: 0 auto;
-  padding: 5px;
   &__input-wrapper {
     display: flex;
     flex-direction: column;
-    &-gender {
-      flex-direction: row;
-      gap: 10px;
-      align-items: center;
+    gap: 2px;
+  }
+  &__title {
+    font-weight: bold;
+    &-data {
+      font-size: 1.6rem;
+      text-align: center;
     }
   }
   &__input {
@@ -20,6 +22,7 @@
     border: 1px solid;
     border-radius: 5px;
     height: 25px;
+    padding-left: 5px;
     &-image {
       border: none;
       height: auto;
@@ -28,12 +31,13 @@
   }
   &__radio-wrapper {
     display: flex;
+    align-items: center;
     gap: 10px;
   }
-  &__radio {
+  &__radio-item {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 2px;
   }
   &__btn {
     width: 100px;
@@ -42,5 +46,24 @@
     border: 1px solid black;
     border-radius: 5px;
     padding: 3px;
+    background-color: transparent;
+    transition: background-color 0.3s ease-in, color 0.3s ease-in;
+    &:hover {
+      background-color: black;
+      color: white;
+    }
+  }
+  &__gender,
+  &__agreement {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    &-text {
+      font-size: 1.6rem;
+    }
+  }
+  &__error {
+    font-size: 1.4rem;
+    color: red;
   }
 }
