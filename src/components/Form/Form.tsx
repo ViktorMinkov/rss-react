@@ -166,7 +166,9 @@ class Form extends React.Component<FormProps, FormState> {
       const inputsValue = this.getInputsValue();
       const newCharacter = { id: Date.now(), ...inputsValue };
       this.props.createCharacter(newCharacter);
-      this.resetForm();
+      setTimeout(() => {
+        this.resetForm();
+      }, 2000);
     }
     this.setState({ ...this.state, ...errors });
   };
@@ -191,7 +193,12 @@ class Form extends React.Component<FormProps, FormState> {
     } = this.state;
     return (
       <form className="form-page__form form" onSubmit={this.sumbitForm} ref={this.formRef}>
-        <InputText inputRef={this.inputNameRef} title={'Full name'} inputError={inputNameError} />
+        <InputText
+          inputRef={this.inputNameRef}
+          title={'Full name'}
+          inputError={inputNameError}
+          placeholder={'Example: Viktor'}
+        />
         <InputRadio
           data={inputRadioData}
           title={'Gender'}
