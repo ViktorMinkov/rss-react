@@ -1,25 +1,29 @@
+import InputCheckbox from 'components/InputCheckbox';
+import InputDate from 'components/InputDate';
+import InputImage from 'components/InputImage';
+import InputRadio from 'components/InputRadio';
+import InputSelect from 'components/InputSelect';
+import InputText from 'components/InputText';
 import React from 'react';
 import { ICard } from 'types';
 import './Form.scss';
+
+const ERROR_TEXT = 'field is required';
+
+const speciesOptions = ['Choose species', 'Human', 'Alien', 'Robot'];
+const statusOptions = ['Choose status', 'Alive', 'Dead'];
 
 type FormProps = {
   createCharacter: (character: ICard) => void;
 };
 interface FormState {
-  name: { valid: boolean; focus: boolean };
-  gender: { valid: boolean; focus: boolean };
-  species: { valid: boolean; focus: boolean };
-  status: { valid: boolean; focus: boolean };
-  date: { valid: boolean; focus: boolean };
-  image: { valid: boolean; focus: boolean };
-  agreement: { valid: boolean; focus: boolean };
-  // inputNameValid: boolean;
-  // inputGenderValid: boolean;
-  // inputSpeciesValid: boolean;
-  // inputStatusValid: boolean;
-  // inputDateValid: boolean;
-  // inputImageValid: boolean;
-  // inputAgreementValid: boolean;
+  inputNameError: string;
+  inputGenderError: string;
+  inputSpeciesError: string;
+  inputStatusError: string;
+  inputDateError: string;
+  inputImageError: string;
+  inputAgreementError: string;
 }
 
 class Form extends React.Component<FormProps, FormState> {
@@ -45,20 +49,13 @@ class Form extends React.Component<FormProps, FormState> {
     this.inputAgreementRef = React.createRef();
     this.formRef = React.createRef();
     this.state = {
-      name: { valid: false, focus: false },
-      gender: { valid: false, focus: false },
-      species: { valid: false, focus: false },
-      status: { valid: false, focus: false },
-      date: { valid: false, focus: false },
-      image: { valid: false, focus: false },
-      agreement: { valid: false, focus: false },
-      // inputNameValid: false,
-      // inputGenderValid: false,
-      // inputSpeciesValid: false,
-      // inputStatusValid: false,
-      // inputDateValid: false,
-      // inputImageValid: false,
-      // inputAgreementValid: false,
+      inputNameError: '',
+      inputGenderError: '',
+      inputSpeciesError: '',
+      inputStatusError: '',
+      inputDateError: '',
+      inputImageError: '',
+      inputAgreementError: '',
     };
   }
 
@@ -66,13 +63,9 @@ class Form extends React.Component<FormProps, FormState> {
     const nameRegexp = /^[A-ZА-Я]/;
     if (this.inputNameRef && this.inputNameRef.current) {
       const { value } = this.inputNameRef.current;
-      if (value.length > 0 && value.match(nameRegexp)) {
-        return { valid: true, focus: true };
-      } else {
-        return { valid: false, focus: true };
-      }
+      return value.length > 0 && value.match(nameRegexp) ? '' : ERROR_TEXT;
     }
-    return { valid: false, focus: false };
+    return ERROR_TEXT;
   };
   validateGender = () => {
     if (
@@ -83,116 +76,99 @@ class Form extends React.Component<FormProps, FormState> {
     ) {
       const maleChecked = this.inputMaleRef.current.checked;
       const femaleChecked = this.inputFemaleRef.current.checked;
-      if (maleChecked || femaleChecked) {
-        return { valid: true, focus: true };
-      } else {
-        return { valid: false, focus: true };
-      }
+      return maleChecked || femaleChecked ? '' : ERROR_TEXT;
     }
-    return { valid: false, focus: false };
+    return ERROR_TEXT;
   };
   validateSpecies = () => {
     if (this.inputSpeciesRef && this.inputSpeciesRef.current) {
       const { value } = this.inputSpeciesRef.current;
-      if (value.length) {
-        return { valid: true, focus: true };
-      } else {
-        return { valid: false, focus: true };
-      }
+      return value.length && value !== speciesOptions[0] ? '' : ERROR_TEXT;
     }
-    return { valid: false, focus: false };
+    return ERROR_TEXT;
   };
   validateStatus = () => {
     if (this.inputStatusRef && this.inputStatusRef.current) {
       const { value } = this.inputStatusRef.current;
-      if (value.length) {
-        return { valid: true, focus: true };
-      } else {
-        return { valid: false, focus: true };
-      }
+      return value.length && value !== statusOptions[0] ? '' : ERROR_TEXT;
     }
-    return { valid: false, focus: false };
+    return ERROR_TEXT;
   };
   validateDate = () => {
     if (this.inputDateRef && this.inputDateRef.current) {
       const { value } = this.inputDateRef.current;
-      if (value.length > 0) {
-        return { valid: true, focus: true };
-      } else {
-        return { valid: false, focus: true };
-      }
+      return value.length ? '' : ERROR_TEXT;
     }
-    return { valid: false, focus: false };
+    return ERROR_TEXT;
   };
   validateImage = () => {
-    if (this.inputImageRef && this.inputImageRef.current) {
-      if (this.inputImageRef.current.files && this.inputImageRef.current.files.length > 0) {
-        return { valid: true, focus: true };
-      } else {
-        return { valid: false, focus: true };
-      }
+    const imageRef = this.inputImageRef;
+    // return this.inputImageRef?.current?.files?.length ? '' : ERROR_TEXT;
+    if (imageRef && imageRef.current) {
+      return imageRef.current.files && imageRef.current.files.length ? '' : ERROR_TEXT;
     }
-    return { valid: false, focus: false };
+    return ERROR_TEXT;
   };
   validateAgreement = () => {
     if (this.inputAgreementRef && this.inputAgreementRef.current) {
       const { checked } = this.inputAgreementRef.current;
-      if (checked) {
-        return { valid: true, focus: true };
-      } else {
-        return { valid: false, focus: true };
-      }
+      return checked ? '' : ERROR_TEXT;
     }
-    return { valid: false, focus: false };
+    return ERROR_TEXT;
   };
   validateForm = () => {
-    const newState = {
-      name: this.validateName(),
-      gender: this.validateGender(),
-      species: this.validateSpecies(),
-      status: this.validateStatus(),
-      date: this.validateDate(),
-      image: this.validateImage(),
-      agreement: this.validateAgreement(),
+    const inputsErrors = {
+      inputNameError: this.validateName(),
+      inputGenderError: this.validateGender(),
+      inputSpeciesError: this.validateSpecies(),
+      inputStatusError: this.validateStatus(),
+      inputDateError: this.validateDate(),
+      inputImageError: this.validateImage(),
+      inputAgreementError: this.validateAgreement(),
     };
-    return newState;
+    return inputsErrors;
+  };
+  getInputsValue = () => {
+    const name = this.inputNameRef.current?.value || '';
+    const status = this.inputStatusRef.current?.value || 'Alive';
+    const species = this.inputSpeciesRef.current?.value || 'Human';
+    const created = this.inputDateRef.current?.value || '';
+    let image = '';
+    if (this.inputImageRef.current && this.inputImageRef.current.files) {
+      image = URL.createObjectURL(this.inputImageRef.current.files[0]);
+    }
+    let gender = '';
+    if (this.inputMaleRef.current && this.inputFemaleRef.current) {
+      if (this.inputMaleRef.current.checked) {
+        gender = this.inputMaleRef.current.value;
+      }
+      if (this.inputFemaleRef.current.checked) {
+        gender = this.inputFemaleRef.current.value;
+      }
+    }
+    return {
+      name,
+      status,
+      species,
+      gender,
+      created,
+      image,
+    };
   };
 
   sumbitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const newState = this.validateForm();
-    if (Object.values(newState).every(({ valid, focus }) => valid && focus)) {
-      console.log('create cards');
-      const name = this.inputNameRef.current?.value || '';
-      const status = this.inputStatusRef.current?.value || 'Alive';
-      const species = this.inputSpeciesRef.current?.value || 'Human';
-      const created = this.inputDateRef.current?.value || '';
-      let image = '';
-      if (this.inputImageRef.current && this.inputImageRef.current.files) {
-        image = URL.createObjectURL(this.inputImageRef.current.files[0]);
-      }
-      let gender = '';
-      if (this.inputMaleRef.current && this.inputFemaleRef.current) {
-        if (this.inputMaleRef.current.checked) {
-          gender = this.inputMaleRef.current.value;
-        }
-        if (this.inputFemaleRef.current.checked) {
-          gender = this.inputFemaleRef.current.value;
-        }
-      }
-      const newCharacter = {
-        id: Date.now(),
-        name,
-        status,
-        species,
-        gender,
-        created,
-        image,
-      };
+    const errors = this.validateForm();
+    for (const [key, value] of Object.entries(errors)) {
+      console.log(`${key}: ${value}`);
+    }
+    if (Object.values(errors).every((error) => !error)) {
+      const inputsValue = this.getInputsValue();
+      const newCharacter = { id: Date.now(), ...inputsValue };
       this.props.createCharacter(newCharacter);
       this.resetForm();
     }
-    this.setState({ ...this.state, ...newState });
+    this.setState({ ...this.state, ...errors });
   };
 
   resetForm = () => {
@@ -200,105 +176,47 @@ class Form extends React.Component<FormProps, FormState> {
   };
 
   render() {
+    const inputRadioData = [
+      { inputValue: 'Male', inputRef: this.inputMaleRef },
+      { inputValue: 'Female', inputRef: this.inputFemaleRef },
+    ];
     const {
-      name,
-      gender,
-      status,
-      species,
-      date,
-      image,
-      agreement,
-      // inputNameValid,
-      // inputGenderValid,
-      // inputSpeciesValid,
-      // inputStatusValid,
-      // inputDateValid,
-      // inputImageValid,
-      // inputAgreementValid,
+      inputNameError,
+      inputGenderError,
+      inputSpeciesError,
+      inputStatusError,
+      inputDateError,
+      inputImageError,
+      inputAgreementError,
     } = this.state;
     return (
       <form className="form-page__form form" onSubmit={this.sumbitForm} ref={this.formRef}>
-        <div className="form__input-wrapper">
-          <div className="form__title">Full name:</div>
-          <input
-            className="form__input"
-            type="text"
-            ref={this.inputNameRef}
-            placeholder="Write fullname"
-          />
-          {!name.valid && name.focus && <div className="form__error">field is required</div>}
-        </div>
-        <div className="form__input-wrapper">
-          <div className="form__gender">
-            <div className="form__title">Gender:</div>
-            <div className="form__radio-wrapper">
-              <div className="form__radio-item">
-                <div className="form__label">Male</div>
-                <input
-                  className="form__input"
-                  type="radio"
-                  name="gender"
-                  value="Male"
-                  ref={this.inputMaleRef}
-                />
-              </div>
-              <div className="form__radio-item">
-                <div className="form__label">Female</div>
-                <input
-                  className="form__input"
-                  type="radio"
-                  name="gender"
-                  value="Female"
-                  ref={this.inputFemaleRef}
-                />
-              </div>
-            </div>
-          </div>
-          {!gender.valid && gender.focus && <div className="form__error">field is required</div>}
-        </div>
-        <div className="form__input-wrapper">
-          <div className="form__title">Species:</div>
-          <select className="form__input" name="species" id="species" ref={this.inputSpeciesRef}>
-            <option value="Human">Human</option>
-            <option value="Alien">Alien</option>
-            <option value="Robot">Robot</option>
-          </select>
-          {!species.valid && species.focus && <div className="form__error">field is required</div>}
-        </div>
-        <div className="form__input-wrapper">
-          <div className="form__title">Status:</div>
-          <select className="form__input" name="status" id="status" ref={this.inputStatusRef}>
-            <option value="Alive">Alive</option>
-            <option value="Dead">Dead</option>
-          </select>
-          {!status.valid && status.focus && <div className="form__error">field is required</div>}
-        </div>
-        <div className="form__input-wrapper">
-          <div className="form__title">Created at:</div>
-          <input className="form__input" type="date" id="date" ref={this.inputDateRef} />
-          {!date.valid && date.focus && <div className="form__error">field is required</div>}
-        </div>
-        <div className="form__input-wrapper">
-          <div className="form__title">Image:</div>
-          <input
-            className="form__input form__input-image"
-            type="file"
-            id="file"
-            accept="image/*"
-            ref={this.inputImageRef}
-          />
-          {!image.valid && image.focus && <div className="form__error">field is required</div>}
-        </div>
-        <div className="form__input-wrapper">
-          <div className="form__agreement">
-            <input className="form__input" type="checkbox" ref={this.inputAgreementRef} />
-            <div className="form__agreement-text">I agree to data processing</div>
-          </div>
-
-          {!agreement.valid && agreement.focus && (
-            <div className="form__error">field is required</div>
-          )}
-        </div>
+        <InputText inputRef={this.inputNameRef} title={'Full name'} inputError={inputNameError} />
+        <InputRadio
+          data={inputRadioData}
+          title={'Gender'}
+          inputName="gender"
+          inputError={inputGenderError}
+        />
+        <InputSelect
+          options={speciesOptions}
+          title="Species"
+          inputRef={this.inputSpeciesRef}
+          inputError={inputSpeciesError}
+        />
+        <InputSelect
+          options={statusOptions}
+          title="Status"
+          inputRef={this.inputStatusRef}
+          inputError={inputStatusError}
+        />
+        <InputDate inputRef={this.inputDateRef} title={'Created at'} inputError={inputDateError} />
+        <InputImage inputRef={this.inputImageRef} title={'Image'} inputError={inputImageError} />
+        <InputCheckbox
+          inputRef={this.inputAgreementRef}
+          text="I agree to data processing"
+          inputError={inputAgreementError}
+        />
         <button className="form__btn" type="submit">
           Create
         </button>
