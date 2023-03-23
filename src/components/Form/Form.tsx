@@ -166,9 +166,7 @@ class Form extends React.Component<FormProps, FormState> {
       const inputsValue = this.getInputsValue();
       const newCharacter = { id: Date.now(), ...inputsValue };
       this.props.createCharacter(newCharacter);
-      setTimeout(() => {
-        this.resetForm();
-      }, 2000);
+      this.resetForm();
     }
     this.setState({ ...this.state, ...errors });
   };

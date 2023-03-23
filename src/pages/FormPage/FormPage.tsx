@@ -21,14 +21,13 @@ class FormPage extends React.Component<FormPageProps, FormPageState> {
   }
 
   createCharacter(character: ICard) {
-    this.setState({ isPopupOpen: true });
+    this.setState((state: FormPageState) => ({
+      isPopupOpen: true,
+      characters: [...state.characters, character],
+    }));
     setTimeout(() => {
-      this.setState({ isPopupOpen: false }, () => {
-        this.setState((state: FormPageState) => ({
-          characters: [...state.characters, character],
-        }));
-      });
-    }, 2000);
+      this.setState({ isPopupOpen: false });
+    }, 1000);
   }
 
   render() {
