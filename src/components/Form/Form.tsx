@@ -130,8 +130,8 @@ class Form extends React.Component<FormProps, FormState> {
   };
   getInputsValue = () => {
     const name = this.inputNameRef.current?.value || '';
-    const status = this.inputStatusRef.current?.value || 'Alive';
-    const species = this.inputSpeciesRef.current?.value || 'Human';
+    const status = this.inputStatusRef.current?.value || statusOptions[0];
+    const species = this.inputSpeciesRef.current?.value || speciesOptions[0];
     const created = this.inputDateRef.current?.value || '';
     let image = '';
     if (this.inputImageRef.current && this.inputImageRef.current.files) {
@@ -159,9 +159,6 @@ class Form extends React.Component<FormProps, FormState> {
   sumbitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const errors = this.validateForm();
-    for (const [key, value] of Object.entries(errors)) {
-      console.log(`${key}: ${value}`);
-    }
     if (Object.values(errors).every((error) => !error)) {
       const inputsValue = this.getInputsValue();
       const newCharacter = { id: Date.now(), ...inputsValue };
