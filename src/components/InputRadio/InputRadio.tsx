@@ -27,7 +27,7 @@ class InputRadio extends React.Component<InputRadioProps> {
                   className="form__input"
                   type="radio"
                   name={inputName}
-                  value={item.inputValue}
+                  defaultValue={item.inputValue}
                   ref={item.inputRef}
                 />
               </div>
