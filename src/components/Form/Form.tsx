@@ -6,9 +6,15 @@ import InputSelect from 'components/InputSelect';
 import InputText from 'components/InputText';
 import React from 'react';
 import { ICard } from 'types';
+import {
+  validateAgreement,
+  validateDate,
+  validateGender,
+  validateImage,
+  validateName,
+  validateSelect,
+} from 'utils/formValidationFuncs';
 import './Form.scss';
-
-const ERROR_TEXT = 'field is required';
 
 const speciesOptions = ['Choose species', 'Human', 'Alien', 'Robot'];
 const statusOptions = ['Choose status', 'Alive', 'Dead'];
@@ -59,75 +65,6 @@ class Form extends React.Component<FormProps, FormState> {
     };
   }
 
-  validateName = () => {
-    const nameRegexp = /^[A-ZА-Я]/;
-    if (this.inputNameRef && this.inputNameRef.current) {
-      const { value } = this.inputNameRef.current;
-      return value.length > 0 && value.match(nameRegexp) ? '' : ERROR_TEXT;
-    }
-    return ERROR_TEXT;
-  };
-  validateGender = () => {
-    if (
-      this.inputMaleRef &&
-      this.inputMaleRef.current &&
-      this.inputFemaleRef &&
-      this.inputFemaleRef.current
-    ) {
-      const maleChecked = this.inputMaleRef.current.checked;
-      const femaleChecked = this.inputFemaleRef.current.checked;
-      return maleChecked || femaleChecked ? '' : ERROR_TEXT;
-    }
-    return ERROR_TEXT;
-  };
-  validateSpecies = () => {
-    if (this.inputSpeciesRef && this.inputSpeciesRef.current) {
-      const { value } = this.inputSpeciesRef.current;
-      return value.length && value !== speciesOptions[0] ? '' : ERROR_TEXT;
-    }
-    return ERROR_TEXT;
-  };
-  validateStatus = () => {
-    if (this.inputStatusRef && this.inputStatusRef.current) {
-      const { value } = this.inputStatusRef.current;
-      return value.length && value !== statusOptions[0] ? '' : ERROR_TEXT;
-    }
-    return ERROR_TEXT;
-  };
-  validateDate = () => {
-    if (this.inputDateRef && this.inputDateRef.current) {
-      const { value } = this.inputDateRef.current;
-      return value.length ? '' : ERROR_TEXT;
-    }
-    return ERROR_TEXT;
-  };
-  validateImage = () => {
-    const imageRef = this.inputImageRef;
-    // return this.inputImageRef?.current?.files?.length ? '' : ERROR_TEXT;
-    if (imageRef && imageRef.current) {
-      return imageRef.current.files && imageRef.current.files.length ? '' : ERROR_TEXT;
-    }
-    return ERROR_TEXT;
-  };
-  validateAgreement = () => {
-    if (this.inputAgreementRef && this.inputAgreementRef.current) {
-      const { checked } = this.inputAgreementRef.current;
-      return checked ? '' : ERROR_TEXT;
-    }
-    return ERROR_TEXT;
-  };
-  validateForm = () => {
-    const inputsErrors = {
-      inputNameError: this.validateName(),
-      inputGenderError: this.validateGender(),
-      inputSpeciesError: this.validateSpecies(),
-      inputStatusError: this.validateStatus(),
-      inputDateError: this.validateDate(),
-      inputImageError: this.validateImage(),
-      inputAgreementError: this.validateAgreement(),
-    };
-    return inputsErrors;
-  };
   getInputsValue = () => {
     const name = this.inputNameRef.current?.value || '';
     const status = this.inputStatusRef.current?.value || statusOptions[0];
@@ -155,17 +92,36 @@ class Form extends React.Component<FormProps, FormState> {
       image,
     };
   };
+  validateForm = () => {
+    const inputsErrors = {
+      inputNameError: validateName(this.inputNameRef.current?.value || ''),
+      inputGenderError: validateGender(
+        this.inputMaleRef.current?.checked || false,
+        this.inputFemaleRef.current?.checked || false
+      ),
+      inputSpeciesError: validateSelect(
+        this.inputSpeciesRef.current?.value || '',
+        speciesOptions[0]
+      ),
+      inputStatusError: validateSelect(this.inputStatusRef.current?.value || '', statusOptions[0]),
+      inputDateError: validateDate(this.inputDateRef.current?.value || ''),
+      inputImageError: validateImage(this.inputImageRef.current?.value || ''),
+      inputAgreementError: validateAgreement(this.inputAgreementRef.current?.checked || false),
+    };
+    const isFormValid = Object.values(inputsErrors).every((error) => !error);
+    return { isFormValid, inputsErrors };
+  };
 
   sumbitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const errors = this.validateForm();
-    if (Object.values(errors).every((error) => !error)) {
-      const inputsValue = this.getInputsValue();
-      const newCharacter = { id: Date.now(), ...inputsValue };
+    const { inputsErrors, isFormValid } = this.validateForm();
+    if (isFormValid) {
+      const inputsValues = this.getInputsValue();
+      const newCharacter = { id: Date.now(), ...inputsValues };
       this.props.createCharacter(newCharacter);
       this.resetForm();
     }
-    this.setState({ ...this.state, ...errors });
+    this.setState({ ...this.state, ...inputsErrors });
   };
 
   resetForm = () => {
