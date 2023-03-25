@@ -1,0 +1,70 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 1.8rem;
+  // width: 300px;
+  margin: 0 auto;
+  &__input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  &__title {
+    font-weight: bold;
+    &-data {
+      font-size: 1.6rem;
+      text-align: center;
+    }
+  }
+  &__input {
+    outline: none;
+    border: 1px solid;
+    border-radius: 5px;
+    height: 25px;
+    padding-left: 5px;
+    font-size: 1.5rem;
+    &-image {
+      border: none;
+      height: auto;
+      border-radius: 0;
+    }
+  }
+  &__radio-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  &__radio-item {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+  &__btn {
+    width: 100px;
+    font-size: 2rem;
+    align-self: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    background-color: transparent;
+    transition: background-color 0.3s ease-in, color 0.3s ease-in;
+    &:hover {
+      background-color: black;
+      color: white;
+    }
+  }
+  &__gender,
+  &__agreement {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    &-text {
+      font-size: 1.6rem;
+    }
+  }
+  &__error {
+    font-size: 1.4rem;
+    color: red;
+  }
+}
