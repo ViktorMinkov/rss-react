@@ -1,6 +1,6 @@
 import Footer from 'components/Footer';
 import Header from 'components/Header';
-import React from 'react';
+import React, { FC } from 'react';
 import './Layout.scss';
 
 type LayoutProps = {
@@ -8,18 +8,17 @@ type LayoutProps = {
   title: string;
 };
 
-class Layout extends React.Component<LayoutProps> {
-  render() {
-    return (
-      <>
-        <Header title={this.props.title} />
-        <main className="main">
-          <div className="main__container container">{this.props.component}</div>
-        </main>
-        <Footer />
-      </>
-    );
-  }
-}
+const Layout: FC<LayoutProps> = (props) => {
+  const { component, title } = props;
+  return (
+    <>
+      <Header title={title} />
+      <main className="main">
+        <div className="main__container container">{component}</div>
+      </main>
+      <Footer />
+    </>
+  );
+};
 
 export default Layout;
