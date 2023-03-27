@@ -1,11 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import './SearchBar.scss';
 
-// type SearchBarProps = Record<string, never>;
-// type SearchBarState = {
-//   searchString: string;
-// };
-
 const SearchBar: FC = () => {
   const [searchString, setSearchString] = useState(localStorage.getItem('searchString') || '');
 

@@ -1,22 +1,28 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { UseFormRegister, Path } from 'react-hook-form';
+import { IFormInputsName } from 'types';
 
 type InputDateProps = {
-  inputRef: React.RefObject<HTMLInputElement>;
   title: string;
+  register: UseFormRegister<IFormInputsName>;
+  inputName: Path<IFormInputsName>;
   inputError: string;
 };
 
-class InputDate extends React.Component<InputDateProps> {
-  render() {
-    const { inputRef, title, inputError } = this.props;
-    return (
-      <div className="form__input-wrapper">
-        <div className="form__title">{title}:</div>
-        <input className="form__input" type="date" name="date" ref={inputRef} />
-        <div className="form__error">{inputError}</div>
-      </div>
-    );
-  }
-}
+const InputDate: FC<InputDateProps> = (props) => {
+  const { title, inputError, inputName, register } = props;
+  return (
+    <div className="form__input-wrapper">
+      <div className="form__title">{title}:</div>
+      <input
+        className="form__input"
+        type="date"
+        role="datePicker"
+        {...register(inputName, { required: `${title} field is required` })}
+      />
+      <div className="form__error">{inputError}</div>
+    </div>
+  );
+};
 
 export default InputDate;

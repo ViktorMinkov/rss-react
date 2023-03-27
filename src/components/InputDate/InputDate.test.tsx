@@ -1,12 +1,12 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
-import { describe, test, expect } from 'vitest';
+import { describe, test, expect, vi } from 'vitest';
 import InputDate from './InputDate';
 
 describe('InputDate test', () => {
+  const register = vi.fn();
   beforeEach(() => {
-    const ref: React.RefObject<HTMLInputElement> = React.createRef();
-    render(<InputDate title="Date" inputError="Error" inputRef={ref} />);
+    render(<InputDate title="Date" inputError="Error" inputName="created" register={register} />);
   });
 
   test('render InputDate component', () => {

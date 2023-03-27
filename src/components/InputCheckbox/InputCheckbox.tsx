@@ -1,24 +1,29 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { UseFormRegister, Path } from 'react-hook-form';
+import { IFormInputsName } from 'types';
 
 type InputCheckboxProps = {
-  inputRef: React.RefObject<HTMLInputElement>;
   text: string;
+  register: UseFormRegister<IFormInputsName>;
+  inputName: Path<IFormInputsName>;
   inputError: string;
 };
 
-class InputCheckbox extends React.Component<InputCheckboxProps> {
-  render() {
-    const { inputRef, text, inputError } = this.props;
-    return (
-      <div className="form__input-wrapper">
-        <div className="form__agreement">
-          <input className="form__input" type="checkbox" name="agreement" ref={inputRef} />
-          <div className="form__agreement-text">{text}</div>
-        </div>
-        <div className="form__error">{inputError}</div>
+const InputCheckbox: FC<InputCheckboxProps> = (props) => {
+  const { text, inputError, inputName, register } = props;
+  return (
+    <div className="form__input-wrapper">
+      <div className="form__agreement">
+        <input
+          className="form__input"
+          type="checkbox"
+          {...register(inputName, { required: `This field is required` })}
+        />
+        <div className="form__agreement-text">{text}</div>
       </div>
-    );
-  }
-}
+      <div className="form__error">{inputError}</div>
+    </div>
+  );
+};
 
 export default InputCheckbox;

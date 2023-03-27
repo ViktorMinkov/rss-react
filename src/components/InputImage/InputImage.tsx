@@ -1,28 +1,30 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { UseFormRegister, Path } from 'react-hook-form';
+import { IFormInputsName } from 'types';
 
 type InputImageProps = {
-  inputRef: React.RefObject<HTMLInputElement>;
   title: string;
+  register: UseFormRegister<IFormInputsName>;
+  inputName: Path<IFormInputsName>;
   inputError: string;
 };
 
-class InputImage extends React.Component<InputImageProps> {
-  render() {
-    const { inputRef, title, inputError } = this.props;
-    return (
-      <div className="form__input-wrapper">
-        <div className="form__title">{title}:</div>
-        <input
-          className="form__input form__input-image"
-          type="file"
-          name="image"
-          accept="image/*"
-          ref={inputRef}
-        />
-        <div className="form__error">{inputError}</div>
-      </div>
-    );
-  }
-}
+const InputImage: FC<InputImageProps> = (props) => {
+  const { title, inputError, inputName, register } = props;
+
+  return (
+    <div className="form__input-wrapper">
+      <div className="form__title">{title}:</div>
+      <input
+        className="form__input form__input-image"
+        type="file"
+        accept="image/*"
+        role="inputImg"
+        {...register(inputName, { required: `${title} field is required` })}
+      />
+      <div className="form__error">{inputError}</div>
+    </div>
+  );
+};
 
 export default InputImage;
