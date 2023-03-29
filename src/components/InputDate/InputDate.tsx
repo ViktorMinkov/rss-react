@@ -18,7 +18,9 @@ const InputDate: FC<InputDateProps> = (props) => {
         className="form__input"
         type="date"
         role="datePicker"
-        {...register(inputName, { required: `${title} field is required` })}
+        {...register(inputName, {
+          validate: (value) => (value.length ? true : `${title} field is required`),
+        })}
       />
       <div className="form__error">{inputError}</div>
     </div>

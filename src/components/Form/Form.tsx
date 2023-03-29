@@ -26,7 +26,10 @@ const Form: FC<FormProps> = (props) => {
     handleSubmit,
     formState: { errors, isSubmitSuccessful },
     reset,
-  } = useForm<IFormInputsName>();
+  } = useForm<IFormInputsName>({
+    mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
+  });
 
   useEffect(() => {
     if (isSubmitSuccessful) {
