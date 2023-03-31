@@ -1,16 +1,23 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import './SearchBar.scss';
 
 const SearchBar: FC = () => {
   const [searchString, setSearchString] = useState(localStorage.getItem('searchString') || '');
+  const searchStringRef = useRef(searchString);
 
   useEffect(() => {
-    localStorage.setItem('searchString', searchString);
-  }, [searchString]);
+    const searchStrFromLS = localStorage.getItem('searchString') || '';
+    setSearchString(searchStrFromLS);
+
+    return () => {
+      localStorage.setItem('searchString', searchStringRef.current);
+    };
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
     setSearchString(target.value);
+    searchStringRef.current = target.value;
   };
 
   const handleFormSumbit = (event: React.FormEvent<HTMLFormElement>) => {
