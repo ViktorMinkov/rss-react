@@ -1,29 +1,38 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { UseFormRegister } from 'react-hook-form/dist/types/form';
+import { Path } from 'react-hook-form/dist/types/path';
+import { IFormInputsName } from 'types';
+import validateSelect from 'utils/validateSelect';
 
 type InputSelectProps = {
   title: string;
+  data: string[];
+  register: UseFormRegister<IFormInputsName>;
+  inputName: Path<IFormInputsName>;
   inputError: string;
-  options: string[];
-  inputRef: React.RefObject<HTMLSelectElement>;
 };
 
-class InputSelect extends React.Component<InputSelectProps> {
-  render() {
-    const { options, title, inputError, inputRef } = this.props;
-    return (
-      <div className="form__input-wrapper">
-        <div className="form__title">{title}:</div>
-        <select className="form__input" name={title} ref={inputRef} defaultValue={options[0]}>
-          {options.map((option, index) => (
-            <option key={index} value={option} disabled={index === 0 && true}>
-              {option}
-            </option>
-          ))}
-        </select>
-        <div className="form__error">{inputError}</div>
-      </div>
-    );
-  }
-}
+const InputSelect: FC<InputSelectProps> = (props) => {
+  const { data, title, inputError, inputName, register } = props;
+  return (
+    <div className="form__input-wrapper">
+      <div className="form__title">{title}:</div>
+      <select
+        className="form__input"
+        defaultValue={data[0]}
+        {...register(inputName, {
+          validate: (value: string) => validateSelect(value, data[0], title),
+        })}
+      >
+        {data.map((data, index) => (
+          <option key={index} value={data} disabled={index === 0 && true}>
+            {data}
+          </option>
+        ))}
+      </select>
+      <div className="form__error">{inputError}</div>
+    </div>
+  );
+};
 
 export default InputSelect;

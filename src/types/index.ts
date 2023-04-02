@@ -18,3 +18,13 @@ export interface ICard {
   url?: string;
   created: string;
 }
+
+export interface IFormInputsName {
+  name: string;
+  gender: string;
+  status: string;
+  species: string;
+  created: string;
+  image: string;
+  agreement: string;
+}

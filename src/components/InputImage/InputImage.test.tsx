@@ -1,12 +1,12 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
-import { describe, test, expect } from 'vitest';
+import { describe, test, expect, vi } from 'vitest';
 import InputImage from './InputImage';
 
 describe('InputImage test', () => {
+  const register = vi.fn();
   beforeEach(() => {
-    const ref: React.RefObject<HTMLInputElement> = React.createRef();
-    render(<InputImage title="Image" inputError="Error" inputRef={ref} />);
+    render(<InputImage title="Image" inputError="Error" inputName="image" register={register} />);
   });
 
   test('render InputImage component', () => {

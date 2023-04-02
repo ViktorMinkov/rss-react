@@ -1,43 +1,38 @@
-import React from 'react';
-
-type InputRadioDataType = {
-  inputValue: string;
-  inputRef: React.RefObject<HTMLInputElement>;
-};
+import React, { FC } from 'react';
+import { Path, UseFormRegister } from 'react-hook-form/dist/types';
+import { IFormInputsName } from 'types';
 
 type InputRadioProps = {
   title: string;
+  inputName: Path<IFormInputsName>;
+  data: string[];
+  register: UseFormRegister<IFormInputsName>;
   inputError: string;
-  inputName: string;
-  data: InputRadioDataType[];
 };
 
-class InputRadio extends React.Component<InputRadioProps> {
-  render() {
-    const { data, title, inputError, inputName } = this.props;
-    return (
-      <div className="form__input-wrapper">
-        <div className="form__gender">
-          <div className="form__title">{title}:</div>
-          <div className="form__radio-wrapper">
-            {data.map((item, index) => (
-              <div className="form__radio-item" key={index}>
-                <div className="form__label">{item.inputValue}</div>
-                <input
-                  className="form__input"
-                  type="radio"
-                  name={inputName}
-                  defaultValue={item.inputValue}
-                  ref={item.inputRef}
-                />
-              </div>
-            ))}
-          </div>
+const InputRadio: FC<InputRadioProps> = (props) => {
+  const { data, title, inputError, inputName, register } = props;
+  return (
+    <div className="form__input-wrapper">
+      <div className="form__gender">
+        <div className="form__title">{title}:</div>
+        <div className="form__radio-wrapper">
+          {data.map((value, index) => (
+            <div className="form__radio-item" key={index}>
+              <div className="form__label">{value}</div>
+              <input
+                className="form__input"
+                type="radio"
+                defaultValue={value}
+                {...register(inputName, { required: `${title} field is required` })}
+              />
+            </div>
+          ))}
         </div>
-        <div className="form__error">{inputError}</div>
       </div>
-    );
-  }
-}
+      <div className="form__error">{inputError}</div>
+    </div>
+  );
+};
 
 export default InputRadio;

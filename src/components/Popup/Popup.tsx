@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import './Popup.scss';
 
 type PopupProps = {
@@ -6,15 +6,13 @@ type PopupProps = {
   isPopupOpen: boolean;
 };
 
-class Popup extends React.Component<PopupProps> {
-  render() {
-    const { text, isPopupOpen } = this.props;
-    return (
-      <div className={isPopupOpen ? 'popup open' : 'popup'} role="popup">
-        <div className="popup__content">{text}</div>
-      </div>
-    );
-  }
-}
+const Popup: FC<PopupProps> = (props) => {
+  const { text, isPopupOpen } = props;
+  return (
+    <div className={isPopupOpen ? 'popup open' : 'popup'} role="popup">
+      <div className="popup__content">{text}</div>
+    </div>
+  );
+};
 
 export default Popup;
