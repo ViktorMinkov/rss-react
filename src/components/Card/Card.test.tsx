@@ -2,7 +2,7 @@ import React from 'react';
 import { screen, render } from '@testing-library/react';
 import { describe, test, expect } from 'vitest';
 import Card from './Card';
-import data from 'utils/data';
+import data from 'utils/charactersData';
 
 const testCharacter = data[0];
 

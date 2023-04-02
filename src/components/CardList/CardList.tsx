@@ -1,18 +1,18 @@
 import Card from 'components/Card';
 import React, { FC } from 'react';
-import { ICard } from 'types';
+import { ICharacter } from 'types';
 import './CardList.scss';
 
 type CardListProps = {
-  data: ICard[];
+  characters: ICharacter[];
 };
 
 const CardList: FC<CardListProps> = (props) => {
-  const { data } = props;
+  const { characters } = props;
   return (
     <>
-      {data.length > 0 ? (
-        data.map((character) => <Card key={character.id} character={character} />)
+      {characters.length > 0 ? (
+        characters.map((character) => <Card key={character.id} character={character} />)
       ) : (
         <div className="card-list_empty">No data</div>
       )}

@@ -1,6 +1,6 @@
-import { ICard } from 'types';
+import { ICharacter } from 'types';
 
-const data: ICard[] = [
+const data: ICharacter[] = [
   {
     id: 1,
     name: 'Rick Sanchez',

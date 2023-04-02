@@ -1,6 +1,10 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import './SearchBar.scss';
 
+// type SearchBarProps = {
+//   filterCharacters: (data: string) => void;
+// };
+
 const SearchBar: FC = () => {
   const [searchString, setSearchString] = useState(localStorage.getItem('searchString') || '');
   const searchStringRef = useRef(searchString);
@@ -29,6 +33,7 @@ const SearchBar: FC = () => {
       <div className="search__block">
         <input
           className="search__input"
+          name="search"
           type="text"
           placeholder="Search..."
           value={searchString}

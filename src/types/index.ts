@@ -1,4 +1,4 @@
-export interface ICard {
+export interface ICharacter {
   id: number;
   name: string;
   status: string;
@@ -27,4 +27,14 @@ export interface IFormInputsName {
   created: string;
   image: string;
   agreement: string;
+}
+
+export interface IApiResponse {
+  info: {
+    count: number;
+    next: null | string;
+    pages: number;
+    prev: null | string;
+  };
+  results: ICharacter[];
 }

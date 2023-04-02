@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import { ICard } from 'types';
+import { ICharacter } from 'types';
 import './Card.scss';
 
 type CardProps = {
   key: number;
-  character: ICard;
+  character: ICharacter;
 };
 const Card: FC<CardProps> = (props) => {
   const { character } = props;
