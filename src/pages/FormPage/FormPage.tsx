@@ -1,9 +1,9 @@
-import CardList from 'components/CardList';
 import Form from 'components/Form';
 import Popup from 'components/Popup';
 import React, { useState } from 'react';
 import { ICharacter } from 'types';
 import './FormPage.scss';
+import FormCard from 'components/FormCard/FormCard';
 
 const FormPage = () => {
   const [characters, setCharacters] = useState<ICharacter[]>([]);
@@ -22,7 +22,11 @@ const FormPage = () => {
       <h1 className="form-page__title">Form page</h1>
       <Form createCharacter={(character: ICharacter) => createCharacter(character)} />
       <div className="form-page__cards">
-        <CardList characters={characters} />
+        {characters.length > 0 ? (
+          characters.map((character) => <FormCard key={character.id} character={character} />)
+        ) : (
+          <div className="form-page__cards_empty">No data</div>
+        )}
       </div>
       <Popup text={'Character is created succesfully 👌'} isPopupOpen={isPopupOpen} />
     </div>
