@@ -11,13 +11,13 @@ const Home = () => {
   const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
-    fetchCharacters();
+    const searchStr = localStorage.getItem('searchString') || '';
+    fetchCharacters(searchStr);
   }, []);
 
-  const fetchCharacters = async () => {
+  const fetchCharacters = async (searchStr: string) => {
     setIsFetching(true);
-    const data = await getCharacters();
-    const characters = data.results;
+    const characters = await getCharacters(searchStr);
     setCharacters(characters);
     setIsFetching(false);
   };
@@ -26,7 +26,7 @@ const Home = () => {
     <div className="home">
       <h1 className="home__title">Home Page</h1>
       <section className="home__search">
-        <SearchBar />
+        <SearchBar fetchCharacters={fetchCharacters} />
       </section>
       <section className="home__cards">
         {isFetching ? <Loader /> : <CardList characters={characters} />}

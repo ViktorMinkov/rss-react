@@ -20,7 +20,7 @@ const Card: FC<CardProps> = (props) => {
 
   return (
     <>
-      <div className="card" onClick={openModal}>
+      <div className="card" onClick={openModal} role="card">
         <div className="card__image-wrapper">
           <img className="card__image" src={character.image} alt={character.name} />
         </div>

@@ -4,13 +4,14 @@ import { describe, test, expect } from 'vitest';
 import Home from './Home';
 
 describe('Home test', () => {
-  test('render Home page component', () => {
+  beforeEach(() => {
     render(<Home />);
+  });
+  test('render Home page component', () => {
     expect(screen.getByText(/home page/i)).toBeInTheDocument();
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
-  test('render button in Home page component', () => {
-    render(<Home />);
+  test('render search button in Home page component', () => {
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 });

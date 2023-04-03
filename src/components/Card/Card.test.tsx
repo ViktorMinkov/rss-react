@@ -4,15 +4,15 @@ import { describe, test, expect } from 'vitest';
 import Card from './Card';
 import data from 'utils/charactersData';
 
-const testCharacter = data[0];
-
 describe('Card test', () => {
-  test('render Card component', () => {
+  const testCharacter = data[0];
+  beforeEach(() => {
     render(<Card character={testCharacter} key={testCharacter.id} />);
+  });
+  test('render Card component', () => {
     expect(screen.getByText(/rick sanchez/i)).toBeInTheDocument();
   });
   test('render image in Card component', () => {
-    render(<Card character={testCharacter} key={testCharacter.id} />);
     expect(screen.getByAltText(/rick/i)).toBeInTheDocument();
   });
 });

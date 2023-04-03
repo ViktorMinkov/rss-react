@@ -28,13 +28,3 @@ export interface IFormInputsName {
   image: string;
   agreement: string;
 }
-
-export interface IApiResponse {
-  info: {
-    count: number;
-    next: null | string;
-    pages: number;
-    prev: null | string;
-  };
-  results: ICharacter[];
-}

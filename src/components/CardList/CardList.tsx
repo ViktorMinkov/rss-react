@@ -11,7 +11,7 @@ const CardList: FC<CardListProps> = (props) => {
   const { characters } = props;
   return (
     <>
-      {characters.length > 0 ? (
+      {characters.length ? (
         characters.map((character) => <Card key={character.id} character={character} />)
       ) : (
         <div className="card-list_empty">No data</div>

@@ -8,13 +8,13 @@ describe('SearchBar test', () => {
   const filterFunc = vi.fn();
   // render(<SearchBar searchString={value} setSearchString={setValue} />);
   test('localStorage works with mount/unmount task', async () => {
-    const searchBar = render(<SearchBar filterCharacters={filterFunc} />);
+    const searchBar = render(<SearchBar fetchCharacters={filterFunc} />);
     const searchInput = screen.getByRole<HTMLInputElement>('textbox');
     const testStr = 'Test String';
     await userEvent.type(searchInput, testStr);
     searchBar.unmount();
     expect(localStorage.getItem('searchString')).toBe(testStr);
-    render(<SearchBar filterCharacters={filterFunc} />);
+    render(<SearchBar fetchCharacters={filterFunc} />);
     const searchInputNew = screen.getByRole<HTMLInputElement>('textbox');
     expect(searchInputNew.value).toBe(testStr);
   });

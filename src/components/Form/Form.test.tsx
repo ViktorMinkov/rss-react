@@ -6,6 +6,17 @@ import userEvent from '@testing-library/user-event';
 
 describe('Form test', () => {
   const createCharacterFunc = vi.fn();
+  const blob = new Blob(['test.png']);
+  const file = new File([blob], 'test.png', { type: 'image/png' });
+  const testData = {
+    title: 'Form page',
+    name: 'Viktor',
+    gender: 'Male',
+    status: 'Alive',
+    species: 'Human',
+    date: '2023-03-25',
+    image: file,
+  };
 
   beforeEach(() => {
     render(<Form createCharacter={createCharacterFunc} />);
@@ -21,8 +32,7 @@ describe('Form test', () => {
   });
   test('check typing in textbox works', async () => {
     const inputText = screen.getByRole<HTMLButtonElement>('textbox');
-    const testText = 'viktor';
-    await userEvent.type(inputText, testText);
-    expect(inputText.value.length).toBe(testText.length);
+    await userEvent.type(inputText, testData.name);
+    expect(inputText.value.length).toBe(testData.name.length);
   });
 });
