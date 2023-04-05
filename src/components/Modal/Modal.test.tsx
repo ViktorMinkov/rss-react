@@ -5,6 +5,7 @@ import Modal from './Modal';
 
 describe('InputImage test', () => {
   const closeModal = vi.fn();
+  const isModalOpen = true;
   const testChar = {
     id: 1,
     name: 'Test Char',
@@ -16,7 +17,7 @@ describe('InputImage test', () => {
     created: '20/5/2022',
   };
   beforeEach(() => {
-    render(<Modal character={testChar} closeModal={closeModal} />);
+    render(<Modal character={testChar} isModalOpen={isModalOpen} closeModal={closeModal} />);
   });
 
   test('render InputImage component', () => {

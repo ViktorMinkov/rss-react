@@ -10,9 +10,9 @@ describe('Card test', () => {
     render(<Card character={testCharacter} key={testCharacter.id} />);
   });
   test('render Card component', () => {
-    expect(screen.getByText(/rick sanchez/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/rick sanchez/i).length).toEqual(2);
   });
   test('render image in Card component', () => {
-    expect(screen.getByAltText(/rick/i)).toBeInTheDocument();
+    expect(screen.getAllByAltText(/rick/i).length).toEqual(2);
   });
 });
