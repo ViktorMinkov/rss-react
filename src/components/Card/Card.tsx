@@ -26,7 +26,7 @@ const Card: FC<CardProps> = (props) => {
         </div>
         <h3 className="card__name">{character.name}</h3>
       </div>
-      {isModalOpen && <Modal character={character} closeModal={closeModal} />}
+      <Modal character={character} isModalOpen={isModalOpen} closeModal={closeModal} />
     </>
   );
 };
