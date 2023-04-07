@@ -2,10 +2,10 @@ import React from 'react';
 import { screen, render } from '@testing-library/react';
 import { describe, test, expect } from 'vitest';
 import Card from './Card';
-import data from 'utils/charactersData';
+import mockData from 'tests/mocks/mockData';
 
 describe('Card test', () => {
-  const testCharacter = data[0];
+  const testCharacter = mockData.results[0];
   beforeEach(() => {
     render(<Card character={testCharacter} key={testCharacter.id} />);
   });

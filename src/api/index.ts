@@ -1,6 +1,6 @@
 import { ICharacter } from 'types';
 
-const baseURL = 'https://rickandmortyapi.com/api/character';
+export const baseURL = 'https://rickandmortyapi.com/api/character';
 
 export const getCharacters = async (searchStr?: string): Promise<ICharacter[] | []> => {
   const url = searchStr ? `${baseURL}/?name=${searchStr}` : baseURL;

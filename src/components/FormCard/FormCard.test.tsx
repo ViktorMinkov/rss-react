@@ -2,9 +2,9 @@ import React from 'react';
 import { screen, render } from '@testing-library/react';
 import { describe, test, expect } from 'vitest';
 import Card from './FormCard';
-import data from 'utils/charactersData';
+import mockData from 'tests/mocks/mockData';
 
-const testCharacter = data[0];
+const testCharacter = mockData.results[0];
 
 describe('Card test', () => {
   test('render Card component', () => {
