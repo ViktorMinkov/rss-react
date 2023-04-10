@@ -7,7 +7,7 @@ import InputText from 'components/InputText';
 import React, { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types/form';
-import { ICard, IFormInputsName } from 'types';
+import { ICharacter, IFormInputsName } from 'types';
 
 import './Form.scss';
 
@@ -16,7 +16,7 @@ const statusOptions = ['Choose status', 'Alive', 'Dead'];
 const inputRadioData = ['Male', 'Female'];
 
 type FormProps = {
-  createCharacter: (character: ICard) => void;
+  createCharacter: (character: ICharacter) => void;
 };
 
 const Form: FC<FormProps> = (props) => {

@@ -1,18 +1,35 @@
 import CardList from 'components/CardList';
 import SearchBar from 'components/SearchBar';
-import React from 'react';
-import data from 'utils/data';
+import React, { useEffect, useState } from 'react';
 import './Home.scss';
+import { getCharacters } from 'api';
+import { ICharacter } from 'types';
+import Loader from 'components/Loader';
 
 const Home = () => {
+  const [characters, setCharacters] = useState<ICharacter[]>([]);
+  const [isFetching, setIsFetching] = useState(false);
+
+  useEffect(() => {
+    const searchStr = localStorage.getItem('searchString') || '';
+    fetchCharacters(searchStr);
+  }, []);
+
+  const fetchCharacters = async (searchStr: string) => {
+    setIsFetching(true);
+    const characters = await getCharacters(searchStr);
+    setCharacters(characters);
+    setIsFetching(false);
+  };
+
   return (
     <div className="home">
       <h1 className="home__title">Home Page</h1>
       <section className="home__search">
-        <SearchBar />
+        <SearchBar fetchCharacters={fetchCharacters} />
       </section>
       <section className="home__cards">
-        <CardList data={data} />
+        {isFetching ? <Loader /> : <CardList characters={characters} />}
       </section>
     </div>
   );

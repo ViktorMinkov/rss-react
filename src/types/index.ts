@@ -1,4 +1,4 @@
-export interface ICard {
+export interface ICharacter {
   id: number;
   name: string;
   status: string;

@@ -1,4 +1,4 @@
-.card {
+.form-card {
   font-size: 1.6rem;
   height: fit-content;
   width: 320px;
@@ -31,7 +31,6 @@
     padding: 5px 0;
     text-align: center;
     border: 1px solid lightgray;
-    border-radius: 0 0 10px 10px;
   }
   &__favourite {
     position: absolute;
