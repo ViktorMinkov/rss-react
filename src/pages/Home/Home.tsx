@@ -11,8 +11,8 @@ const Home = () => {
   const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
-    const searchStr = localStorage.getItem('searchString') || '';
-    fetchCharacters(searchStr);
+    // const searchStr = localStorage.getItem('searchString') || '';
+    fetchCharacters('');
   }, []);
 
   const fetchCharacters = async (searchStr: string) => {

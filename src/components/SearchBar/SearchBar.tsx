@@ -1,25 +1,28 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useRef } from 'react';
 import './SearchBar.scss';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { setSearchString } from 'store/reducers/searchReducer';
 
 type SearchBarProps = {
   fetchCharacters: (data: string) => void;
 };
 
 const SearchBar: FC<SearchBarProps> = (props) => {
-  const [searchString, setSearchString] = useState(localStorage.getItem('searchString') || '');
+  const searchString = useAppSelector((state) => state.search.searchString);
+  const dispatch = useAppDispatch();
   const searchStringRef = useRef(searchString);
   const { fetchCharacters } = props;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
-    setSearchString(target.value);
+    dispatch(setSearchString(target.value));
     searchStringRef.current = target.value;
   };
 
   const handleFormSumbit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    dispatch(setSearchString(searchStringRef.current));
     fetchCharacters(searchString);
-    localStorage.setItem('searchString', searchStringRef.current);
   };
 
   return (

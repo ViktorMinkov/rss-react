@@ -4,14 +4,19 @@ import React, { useState } from 'react';
 import { ICharacter } from 'types';
 import './FormPage.scss';
 import FormCard from 'components/FormCard/FormCard';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { setCharacters } from 'store/reducers/formReducer';
 
 const FormPage = () => {
-  const [characters, setCharacters] = useState<ICharacter[]>([]);
+  // const [characters, setCharacters] = useState<ICharacter[]>([]);
+  const characters = useAppSelector((state) => state.form.characters);
+  const dispatch = useAppDispatch();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const createCharacter = (character: ICharacter) => {
     setIsPopupOpen(true);
-    setCharacters([...characters, character]);
+    // setCharacters([...characters, character]);
+    dispatch(setCharacters(character));
     setTimeout(() => {
       setIsPopupOpen(false);
     }, 1000);
