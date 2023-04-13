@@ -5,15 +5,16 @@ import './Home.scss';
 import { getCharacters } from 'api';
 import { ICharacter } from 'types';
 import Loader from 'components/Loader';
+import { useAppSelector } from 'store/hooks';
 
 const Home = () => {
   const [characters, setCharacters] = useState<ICharacter[]>([]);
   const [isFetching, setIsFetching] = useState(false);
+  const searchString = useAppSelector((state) => state.search.searchString);
 
   useEffect(() => {
-    // const searchStr = localStorage.getItem('searchString') || '';
-    fetchCharacters('');
-  }, []);
+    fetchCharacters(searchString);
+  }, [searchString]);
 
   const fetchCharacters = async (searchStr: string) => {
     setIsFetching(true);
@@ -26,7 +27,7 @@ const Home = () => {
     <div className="home">
       <h1 className="home__title">Home Page</h1>
       <section className="home__search">
-        <SearchBar fetchCharacters={fetchCharacters} />
+        <SearchBar />
       </section>
       <section className="home__cards">
         {isFetching ? <Loader /> : <CardList characters={characters} />}

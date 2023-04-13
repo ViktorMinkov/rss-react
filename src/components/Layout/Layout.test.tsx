@@ -4,12 +4,16 @@ import { describe, test, expect } from 'vitest';
 import Layout from './Layout';
 import Home from 'pages/Home';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from 'store/store';
 
 describe('Layout test', () => {
   test('render Layout component', () => {
     render(
       <BrowserRouter>
-        <Layout title="Home" component={<Home />} />
+        <Provider store={store}>
+          <Layout title="Home" component={<Home />} />
+        </Provider>
       </BrowserRouter>
     );
     expect(screen.getByText(/search/i)).toBeInTheDocument();
