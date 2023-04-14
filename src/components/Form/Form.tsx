@@ -7,7 +7,7 @@ import InputText from 'components/InputText';
 import React, { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types/form';
-import { ICharacter, IFormInputsName } from 'types';
+import { ICharacter, IFormData } from 'types';
 import { setCharacters, togglePopup } from 'store/reducers/formReducer';
 
 import './Form.scss';
@@ -24,7 +24,7 @@ const Form: FC = () => {
     handleSubmit,
     formState: { errors, isSubmitSuccessful },
     reset,
-  } = useForm<IFormInputsName>({
+  } = useForm<IFormData>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
   });
@@ -43,10 +43,8 @@ const Form: FC = () => {
     }, 1000);
   };
 
-  const onSubmit: SubmitHandler<IFormInputsName> = (formData) => {
-    const files = formData.image;
-    const file = files ? files[0] : null;
-    const image = file ? URL.createObjectURL(file) : '';
+  const onSubmit: SubmitHandler<IFormData> = (formData) => {
+    const image = URL.createObjectURL(formData.image[0]);
     const newData = { ...formData, image };
     const newCharacter = { id: Date.now(), ...newData };
     createCharacter(newCharacter);
@@ -58,7 +56,7 @@ const Form: FC = () => {
         title="Full name"
         inputName="name"
         inputError={errors.name?.message || ''}
-        placeholder={'Example: Viktor'}
+        placeholder="Example: Viktor"
         register={register}
       />
       <InputRadio

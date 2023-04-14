@@ -1,14 +1,13 @@
 import React, { FC } from 'react';
 import { UseFormRegister } from 'react-hook-form/dist/types/form';
 import { Path } from 'react-hook-form/dist/types/path';
-import { IFormInputsName } from 'types';
-import validateSelect from 'utils/validateSelect';
+import { IFormData } from 'types';
 
 type InputSelectProps = {
   title: string;
   data: string[];
-  register: UseFormRegister<IFormInputsName>;
-  inputName: Path<IFormInputsName>;
+  register: UseFormRegister<IFormData>;
+  inputName: Path<IFormData>;
   inputError: string;
 };
 
@@ -21,7 +20,7 @@ const InputSelect: FC<InputSelectProps> = (props) => {
         className="form__input"
         defaultValue={data[0]}
         {...register(inputName, {
-          validate: (value: string) => validateSelect(value, data[0], title),
+          validate: (value) => value !== data[0] || `${title} field is required`,
         })}
       >
         {data.map((data, index) => (

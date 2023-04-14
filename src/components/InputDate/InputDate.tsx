@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { UseFormRegister, Path } from 'react-hook-form';
-import { IFormInputsName } from 'types';
+import { IFormData } from 'types';
 
 type InputDateProps = {
   title: string;
-  register: UseFormRegister<IFormInputsName>;
-  inputName: Path<IFormInputsName>;
+  register: UseFormRegister<IFormData>;
+  inputName: Path<IFormData>;
   inputError: string;
 };
 
