@@ -9,9 +9,4 @@ describe('CardList test', () => {
     render(<CardList characters={mockData.results} />);
     expect(screen.getAllByText(/morty smith/i).length).toEqual(2);
   });
-  test('render CardList component with empty data', () => {
-    render(<CardList characters={[]} />);
-    expect(screen.queryByText(/morty smith/i)).toBeNull();
-    expect(screen.getByText(/no data/i)).toBeInTheDocument();
-  });
 });

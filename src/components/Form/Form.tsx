@@ -44,7 +44,9 @@ const Form: FC = () => {
   };
 
   const onSubmit: SubmitHandler<IFormInputsName> = (formData) => {
-    const image = URL.createObjectURL(new Blob([formData.image[0]]));
+    const files = formData.image;
+    const file = files ? files[0] : null;
+    const image = file ? URL.createObjectURL(file) : '';
     const newData = { ...formData, image };
     const newCharacter = { id: Date.now(), ...newData };
     createCharacter(newCharacter);

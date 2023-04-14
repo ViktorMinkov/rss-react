@@ -25,7 +25,7 @@ export interface IFormInputsName {
   status: string;
   species: string;
   created: string;
-  image: string;
+  image: FileList | null;
   agreement: string;
 }
 

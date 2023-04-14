@@ -10,7 +10,7 @@ const FormCard: FC<FormCardProps> = (props) => {
   const { character } = props;
   const date = new Date(character.created);
   return (
-    <div className="form-card">
+    <div className="form-card" role="formcard">
       <div className="form-card__image-wrapper">
         <img className="form-card__image" src={character.image} alt={character.name} />
       </div>

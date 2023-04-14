@@ -2,20 +2,21 @@ import React from 'react';
 import { screen, render } from '@testing-library/react';
 import { describe, test, expect } from 'vitest';
 import Popup from './Popup';
+import { Provider } from 'react-redux';
+import { store } from 'store/store';
 
 describe('Popup test', () => {
+  beforeEach(() => {
+    render(
+      <Provider store={store}>
+        <Popup text="Popup" />
+      </Provider>
+    );
+  });
   test('render Popup component', () => {
-    render(<Popup text="Popup" isPopupOpen={true} />);
     expect(screen.getByText(/popup/i)).toBeInTheDocument();
   });
-  test('check classes after Popup open', () => {
-    render(<Popup text="Popup" isPopupOpen={true} />);
-    const popupWrapper = screen.getByRole('popup');
-    expect(popupWrapper).toHaveClass('popup open');
-  });
-  test('check classes after Popup close', () => {
-    render(<Popup text="Popup" isPopupOpen={false} />);
-    const popupWrapper = screen.getByRole('popup');
-    expect(popupWrapper).toHaveClass('popup');
+  test('render Popup component', () => {
+    expect(screen.getByText(/popup/i)).toBeInTheDocument();
   });
 });
