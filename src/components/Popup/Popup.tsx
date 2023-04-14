@@ -1,13 +1,14 @@
 import React, { FC } from 'react';
 import './Popup.scss';
+import { useAppSelector } from 'store/hooks';
 
 type PopupProps = {
   text: string;
-  isPopupOpen: boolean;
 };
 
 const Popup: FC<PopupProps> = (props) => {
-  const { text, isPopupOpen } = props;
+  const { text } = props;
+  const { isPopupOpen } = useAppSelector((state) => state.form);
   return (
     <div className={isPopupOpen ? 'popup open' : 'popup'} role="popup">
       <div className="popup__content">{text}</div>

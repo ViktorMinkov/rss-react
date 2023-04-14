@@ -21,6 +21,11 @@
   &__loader {
     grid-column: 1 / -1;
   }
+  &__error {
+    font-size: 3rem;
+    text-align: center;
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 1400px) {

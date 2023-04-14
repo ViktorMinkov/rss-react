@@ -8,19 +8,17 @@ import React, { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types/form';
 import { ICharacter, IFormInputsName } from 'types';
+import { setCharacters, togglePopup } from 'store/reducers/formReducer';
 
 import './Form.scss';
+import { useAppDispatch } from 'store/hooks';
 
 const speciesOptions = ['Choose species', 'Human', 'Alien', 'Robot'];
 const statusOptions = ['Choose status', 'Alive', 'Dead'];
 const inputRadioData = ['Male', 'Female'];
 
-type FormProps = {
-  createCharacter: (character: ICharacter) => void;
-};
-
-const Form: FC<FormProps> = (props) => {
-  const { createCharacter } = props;
+const Form: FC = () => {
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -36,6 +34,14 @@ const Form: FC<FormProps> = (props) => {
       reset();
     }
   }, [isSubmitSuccessful, reset]);
+
+  const createCharacter = (character: ICharacter) => {
+    dispatch(togglePopup(true));
+    dispatch(setCharacters(character));
+    setTimeout(() => {
+      dispatch(togglePopup(false));
+    }, 1000);
+  };
 
   const onSubmit: SubmitHandler<IFormInputsName> = (formData) => {
     const image = URL.createObjectURL(new Blob([formData.image[0]]));

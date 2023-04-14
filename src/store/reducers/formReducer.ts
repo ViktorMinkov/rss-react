@@ -2,11 +2,13 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { ICharacter } from 'types';
 
 type FormType = {
-  characters: ICharacter[] | [];
+  characters: ICharacter[];
+  isPopupOpen: boolean;
 };
 
 const initialState: FormType = {
   characters: [],
+  isPopupOpen: false,
 };
 
 export const formSlice = createSlice({
@@ -14,10 +16,13 @@ export const formSlice = createSlice({
   initialState,
   reducers: {
     setCharacters: (state, action: PayloadAction<ICharacter>) => {
-      state.characters = [...state.characters, action.payload];
+      state.characters.push(action.payload);
+    },
+    togglePopup: (state, action: PayloadAction<boolean>) => {
+      state.isPopupOpen = action.payload;
     },
   },
 });
 
-export const { setCharacters } = formSlice.actions;
+export const { setCharacters, togglePopup } = formSlice.actions;
 export default formSlice.reducer;

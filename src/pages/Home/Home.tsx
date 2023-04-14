@@ -1,27 +1,20 @@
 import CardList from 'components/CardList';
 import SearchBar from 'components/SearchBar';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './Home.scss';
-import { getCharacters } from 'api';
-import { ICharacter } from 'types';
 import Loader from 'components/Loader';
-import { useAppSelector } from 'store/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { fetchCharacters } from 'store/reducers/homePageReducer';
 
 const Home = () => {
-  const [characters, setCharacters] = useState<ICharacter[]>([]);
-  const [isFetching, setIsFetching] = useState(false);
-  const searchString = useAppSelector((state) => state.search.searchString);
+  const { searchString, characters, isLoading, errorMsg } = useAppSelector(
+    (state) => state.homePage
+  );
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    fetchCharacters(searchString);
-  }, [searchString]);
-
-  const fetchCharacters = async (searchStr: string) => {
-    setIsFetching(true);
-    const characters = await getCharacters(searchStr);
-    setCharacters(characters);
-    setIsFetching(false);
-  };
+    dispatch(fetchCharacters(searchString));
+  }, [searchString, dispatch]);
 
   return (
     <div className="home">
@@ -30,7 +23,9 @@ const Home = () => {
         <SearchBar />
       </section>
       <section className="home__cards">
-        {isFetching ? <Loader /> : <CardList characters={characters} />}
+        {errorMsg && <h3 className="home__error">{errorMsg}</h3>}
+        {isLoading && <Loader />}
+        {!errorMsg && characters && <CardList characters={characters} />}
       </section>
     </div>
   );
