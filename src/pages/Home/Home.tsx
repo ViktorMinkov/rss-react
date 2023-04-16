@@ -25,7 +25,7 @@ const Home = () => {
       <section className="home__cards">
         {errorMsg && <h3 className="home__error">{errorMsg}</h3>}
         {isLoading && <Loader />}
-        {!errorMsg && characters && <CardList characters={characters} />}
+        {!errorMsg && !isLoading && characters && <CardList characters={characters} />}
       </section>
     </div>
   );
