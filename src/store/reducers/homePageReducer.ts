@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getCharacters } from 'api';
+import { baseURL, getCharacters } from 'api';
 import { ICharacter } from 'types';
 
 type HomePageType = {
@@ -7,6 +7,7 @@ type HomePageType = {
   characters: ICharacter[];
   isLoading: boolean;
   errorMsg: string;
+  character: ICharacter | object;
 };
 
 const initialState: HomePageType = {
@@ -14,6 +15,7 @@ const initialState: HomePageType = {
   characters: [],
   isLoading: false,
   errorMsg: '',
+  character: {},
 };
 
 export const fetchCharacters = createAsyncThunk(
@@ -24,6 +26,18 @@ export const fetchCharacters = createAsyncThunk(
       return characters;
     } catch (error) {
       return thunkAPI.rejectWithValue(`${error}: We have nothing there`);
+    }
+  }
+);
+export const fetchCharacterByID = createAsyncThunk(
+  'charactersById/fetch',
+  async (id: number, thunkAPI) => {
+    try {
+      const response = await fetch(`${baseURL}/${id}`);
+      const character = await response.json();
+      return character;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(`${error}: invalid ID`);
     }
   }
 );
@@ -49,6 +63,9 @@ export const homePageSlice = createSlice({
       .addCase(fetchCharacters.rejected, (state, action) => {
         state.isLoading = false;
         state.errorMsg = action.payload as string;
+      })
+      .addCase(fetchCharacterByID.fulfilled, (state, action) => {
+        state.character = action.payload as ICharacter;
       });
   },
 });
