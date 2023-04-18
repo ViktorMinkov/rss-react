@@ -4,7 +4,6 @@ import { describe, test, expect, vi } from 'vitest';
 import Modal from './Modal';
 import { Provider } from 'react-redux';
 import { store } from 'store/store';
-import userEvent from '@testing-library/user-event';
 
 describe('Modal test', () => {
   const closeModal = vi.fn();
