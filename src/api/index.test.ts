@@ -1,7 +1,7 @@
 import { getCharacters } from 'api';
 import { describe, test, expect } from 'vitest';
 
-describe('validateSelect func works', () => {
+describe('Api func', () => {
   test('check Api func with correct searchStr', async () => {
     const searchStr = 'adjudicator';
     const result = await getCharacters(searchStr);

@@ -24,7 +24,7 @@ describe('Home test', () => {
         <Home />
       </Provider>
     );
-    expect((await screen.findAllByText(/test/i)).length).toBe(2);
+    expect(await screen.findByText(/test/i)).toBeInTheDocument();
     expect(screen.getAllByRole('card').length).toBe(mockData.results.length);
     server.resetHandlers();
     server.close();
