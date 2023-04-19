@@ -2,6 +2,8 @@ import React, { FC, useState } from 'react';
 import { ICharacter } from 'types';
 import './Card.scss';
 import Modal from 'components/Modal';
+import { useAppDispatch } from 'store/hooks';
+import { fetchCharacterByID } from 'store/reducers/homePageReducer';
 
 type CardProps = {
   key: number;
@@ -10,8 +12,10 @@ type CardProps = {
 const Card: FC<CardProps> = (props) => {
   const { character } = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useAppDispatch();
 
   const openModal = () => {
+    dispatch(fetchCharacterByID(character.id));
     setIsModalOpen(true);
   };
   const closeModal = () => {
@@ -26,7 +30,7 @@ const Card: FC<CardProps> = (props) => {
         </div>
         <h3 className="card__name">{character.name}</h3>
       </div>
-      <Modal character={character} isModalOpen={isModalOpen} closeModal={closeModal} />
+      <Modal isModalOpen={isModalOpen} closeModal={closeModal} />
     </>
   );
 };

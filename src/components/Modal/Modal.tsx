@@ -1,15 +1,17 @@
 import React, { FC } from 'react';
 import { ICharacter } from 'types';
 import './Modal.scss';
+import { useAppSelector } from 'store/hooks';
 
 type ModalProps = {
-  character: ICharacter;
   isModalOpen: boolean;
   closeModal: () => void;
 };
 
 const Modal: FC<ModalProps> = (props) => {
-  const { character, isModalOpen, closeModal } = props;
+  const { isModalOpen, closeModal } = props;
+  const character = useAppSelector((state) => state.homePage.character) as ICharacter;
+
   return (
     <div className={isModalOpen ? 'modal open' : 'modal'} onClick={closeModal} role="modal">
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>

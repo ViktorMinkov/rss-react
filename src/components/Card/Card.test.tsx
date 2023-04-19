@@ -3,16 +3,22 @@ import { screen, render } from '@testing-library/react';
 import { describe, test, expect } from 'vitest';
 import Card from './Card';
 import mockData from 'tests/mocks/mockData';
+import { Provider } from 'react-redux';
+import { store } from 'store/store';
 
 describe('Card test', () => {
   const testCharacter = mockData.results[0];
   beforeEach(() => {
-    render(<Card character={testCharacter} key={testCharacter.id} />);
+    render(
+      <Provider store={store}>
+        <Card character={testCharacter} key={testCharacter.id} />
+      </Provider>
+    );
   });
   test('render Card component', () => {
-    expect(screen.getAllByText(/rick sanchez/i).length).toEqual(2);
+    expect(screen.getByText(/rick sanchez/i)).toBeInTheDocument();
   });
   test('render image in Card component', () => {
-    expect(screen.getAllByAltText(/rick/i).length).toEqual(2);
+    expect(screen.getByAltText(/rick sanchez/i)).toBeInTheDocument();
   });
 });

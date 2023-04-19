@@ -19,12 +19,23 @@ export interface ICharacter {
   created: string;
 }
 
-export interface IFormInputsName {
+export interface IFormData {
   name: string;
   gender: string;
   status: string;
   species: string;
   created: string;
-  image: string;
-  agreement: string;
+  image: FileList;
+  agreement: boolean;
 }
+
+// export interface IApiResponse {
+//   info: {
+//     count: number;
+//     next: string | null;
+//     pages: number;
+//     prev: string | null;
+//   };
+//   results: ICharacter[];
+//   error?: string;
+// }

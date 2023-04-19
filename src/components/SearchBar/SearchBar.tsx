@@ -1,25 +1,19 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useRef } from 'react';
 import './SearchBar.scss';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { setSearchString } from 'store/reducers/homePageReducer';
 
-type SearchBarProps = {
-  fetchCharacters: (data: string) => void;
-};
-
-const SearchBar: FC<SearchBarProps> = (props) => {
-  const [searchString, setSearchString] = useState(localStorage.getItem('searchString') || '');
-  const searchStringRef = useRef(searchString);
-  const { fetchCharacters } = props;
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { target } = event;
-    setSearchString(target.value);
-    searchStringRef.current = target.value;
-  };
+const SearchBar: FC = () => {
+  const searchString = useAppSelector((state) => state.homePage.searchString);
+  const dispatch = useAppDispatch();
+  const searchStringRef = useRef<HTMLInputElement>(null);
 
   const handleFormSumbit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    fetchCharacters(searchString);
-    localStorage.setItem('searchString', searchStringRef.current);
+    if (searchStringRef.current) {
+      const searcthStr = searchStringRef.current.value;
+      dispatch(setSearchString(searcthStr));
+    }
   };
 
   return (
@@ -30,8 +24,8 @@ const SearchBar: FC<SearchBarProps> = (props) => {
           name="search"
           type="text"
           placeholder="Search..."
-          value={searchString}
-          onChange={handleChange}
+          defaultValue={searchString}
+          ref={searchStringRef}
         />
         <div className="search__icon"></div>
       </div>

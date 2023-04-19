@@ -1,25 +1,19 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
-import { describe, test, expect, vi } from 'vitest';
+import { describe, test, expect } from 'vitest';
 import Form from './Form';
 import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
+import { store } from 'store/store';
 
 describe('Form test', () => {
-  const createCharacterFunc = vi.fn();
-  const blob = new Blob(['test.png']);
-  const file = new File([blob], 'test.png', { type: 'image/png' });
-  const testData = {
-    title: 'Form page',
-    name: 'Viktor',
-    gender: 'Male',
-    status: 'Alive',
-    species: 'Human',
-    date: '2023-03-25',
-    image: file,
-  };
-
+  const testName = 'Viktor';
   beforeEach(() => {
-    render(<Form createCharacter={createCharacterFunc} />);
+    render(
+      <Provider store={store}>
+        <Form />
+      </Provider>
+    );
   });
   test('render Form component', () => {
     expect(screen.getByText(/Full name/)).toBeInTheDocument();
@@ -31,8 +25,8 @@ describe('Form test', () => {
     expect(screen.getByText(/data processing/i)).toBeInTheDocument();
   });
   test('check typing in textbox works', async () => {
-    const inputText = screen.getByRole<HTMLButtonElement>('textbox');
-    await userEvent.type(inputText, testData.name);
-    expect(inputText.value.length).toBe(testData.name.length);
+    const inputText = screen.getByRole<HTMLInputElement>('textbox');
+    await userEvent.type(inputText, testName);
+    expect(inputText.value.length).toBe(testName.length);
   });
 });

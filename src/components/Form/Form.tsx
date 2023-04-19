@@ -7,26 +7,24 @@ import InputText from 'components/InputText';
 import React, { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types/form';
-import { ICharacter, IFormInputsName } from 'types';
+import { ICharacter, IFormData } from 'types';
+import { setCharacters, togglePopup } from 'store/reducers/formReducer';
 
 import './Form.scss';
+import { useAppDispatch } from 'store/hooks';
 
 const speciesOptions = ['Choose species', 'Human', 'Alien', 'Robot'];
 const statusOptions = ['Choose status', 'Alive', 'Dead'];
 const inputRadioData = ['Male', 'Female'];
 
-type FormProps = {
-  createCharacter: (character: ICharacter) => void;
-};
-
-const Form: FC<FormProps> = (props) => {
-  const { createCharacter } = props;
+const Form: FC = () => {
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitSuccessful },
     reset,
-  } = useForm<IFormInputsName>({
+  } = useForm<IFormData>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
   });
@@ -37,8 +35,16 @@ const Form: FC<FormProps> = (props) => {
     }
   }, [isSubmitSuccessful, reset]);
 
-  const onSubmit: SubmitHandler<IFormInputsName> = (formData) => {
-    const image = URL.createObjectURL(new Blob([formData.image[0]]));
+  const createCharacter = (character: ICharacter) => {
+    dispatch(togglePopup(true));
+    dispatch(setCharacters(character));
+    setTimeout(() => {
+      dispatch(togglePopup(false));
+    }, 1000);
+  };
+
+  const onSubmit: SubmitHandler<IFormData> = (formData) => {
+    const image = URL.createObjectURL(formData.image[0]);
     const newData = { ...formData, image };
     const newCharacter = { id: Date.now(), ...newData };
     createCharacter(newCharacter);
@@ -50,7 +56,7 @@ const Form: FC<FormProps> = (props) => {
         title="Full name"
         inputName="name"
         inputError={errors.name?.message || ''}
-        placeholder={'Example: Viktor'}
+        placeholder="Example: Viktor"
         register={register}
       />
       <InputRadio
