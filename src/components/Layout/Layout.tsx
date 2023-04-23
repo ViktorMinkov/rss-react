@@ -4,17 +4,16 @@ import React, { FC } from 'react';
 import './Layout.scss';
 
 type LayoutProps = {
-  component: React.ReactNode;
-  title: string;
+  children: React.ReactNode;
 };
 
 const Layout: FC<LayoutProps> = (props) => {
-  const { component, title } = props;
+  const { children } = props;
   return (
     <>
-      <Header title={title} />
+      <Header />
       <main className="main">
-        <div className="main__container container">{component}</div>
+        <div className="main__container container">{children}</div>
       </main>
       <Footer />
     </>

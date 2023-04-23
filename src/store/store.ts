@@ -1,13 +1,18 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import homePageSlice from './reducers/homePageReducer';
 import formSlice from './reducers/formReducer';
 
-export const store = configureStore({
-  reducer: {
-    homePage: homePageSlice,
-    form: formSlice,
-  },
+const rootReducer = combineReducers({
+  homePageSlice,
+  formSlice,
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export default function configureAppStore(preloadedState?: object) {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState,
+  });
+}
+export type RootState = ReturnType<typeof rootReducer>;
+export type Store = ReturnType<typeof configureAppStore>;
+export type AppDispatch = ReturnType<typeof configureAppStore>['dispatch'];
