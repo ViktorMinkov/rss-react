@@ -1,9 +1,14 @@
 {
-  "compilerOptions": {
-    "composite": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "allowSyntheticDefaultImports": true
+  "extends": "./tsconfig.json",
+  "ts-node": {
+    "esm": true,
+    "transpileOnly": true,
+    "experimentalSpecifierResolution": "node",
   },
-  "include": ["vite.config.ts"]
+  "include": [
+    "server.ts"
+  ],
+  "exclude": [
+    "vite.config.ts"
+  ],
 }
