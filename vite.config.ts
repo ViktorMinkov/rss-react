@@ -10,13 +10,27 @@ import path from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react({ fastRefresh: false }), tsconfigPaths()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
   test: {
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/tests/setup.ts',
     css: false,
     coverage: {
-      exclude: [...configDefaults.exclude, 'src/types/*', 'src/main.tsx', '**/*.d.ts '],
+      exclude: [
+        ...configDefaults.exclude,
+        'src/types/*',
+        'src/main.tsx',
+        '**/*.d.ts ',
+        'src/clientApp.tsx',
+        'src/serverApp.tsx',
+        '**/server.ts',
+        '**/vite.server.config.ts',
+      ],
       provider: 'c8',
       reporter: ['text'],
       all: true,

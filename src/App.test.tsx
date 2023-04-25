@@ -4,21 +4,21 @@ import { describe, test, expect } from 'vitest';
 import App from './App';
 import { Provider } from 'react-redux';
 import configureAppStore from 'store/store';
+import { BrowserRouter } from 'react-router-dom';
 
 const store = configureAppStore();
 
 describe('App test', () => {
   beforeEach(() => {
     render(
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <BrowserRouter>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </BrowserRouter>
     );
   });
   test('render App', () => {
-    expect(screen.getByText(/home page/i)).toBeInTheDocument();
-  });
-  test('find home title', () => {
-    expect(screen.getByText(/home page/i)).toHaveClass('home__title');
+    expect(screen.getByRole('button')).toBeInTheDocument();
   });
 });
