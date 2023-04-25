@@ -1,3 +1,3 @@
-import Card from './FormCard';
+import FormCard from './FormCard';
 
-export default Card;
+export default FormCard;

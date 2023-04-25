@@ -8,7 +8,7 @@ describe('Header test', () => {
   test('render Header component', () => {
     render(
       <BrowserRouter>
-        <Header title="Header" />
+        <Header />
       </BrowserRouter>
     );
     expect(screen.getByText(/header/i)).toBeInTheDocument();
@@ -17,7 +17,7 @@ describe('Header test', () => {
   test('render Header without title', () => {
     render(
       <BrowserRouter>
-        <Header title="" />
+        <Header />
       </BrowserRouter>
     );
     expect(screen.queryByText(/header/i)).toBeNull();

@@ -3,7 +3,9 @@ import { screen, render } from '@testing-library/react';
 import { describe, test, expect, vi } from 'vitest';
 import Modal from './Modal';
 import { Provider } from 'react-redux';
-import { store } from 'store/store';
+import configureAppStore from 'store/store';
+
+const store = configureAppStore();
 
 describe('Modal test', () => {
   const closeModal = vi.fn();

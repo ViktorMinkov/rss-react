@@ -1,45 +1,53 @@
-import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import express from 'express';
-import { createServer as createViteServer } from 'vite';
+import { createServer as createViteServer, ViteDevServer } from 'vite';
+import * as dotenv from 'dotenv';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config();
+
 const PORT = 3000;
+const isProd = process.env.NODE_ENV === 'production';
 
-async function createServer() {
+let viteServer: ViteDevServer;
+
+const createServer = async () => {
   const app = express();
-  const viteServer = await createViteServer({
-    server: { middlewareMode: true },
-    appType: 'custom',
-  });
-  app.use(viteServer.middlewares);
+
+  if (!isProd) {
+    viteServer = await createViteServer({
+      server: { middlewareMode: true },
+      appType: 'custom',
+    });
+    app.use(viteServer.middlewares);
+  } else {
+    app.use('./dist/client', express.static('./dist/client'));
+  }
 
   app.use('*', async (req, res, next) => {
     const url = req.originalUrl;
 
     try {
-      let template = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf-8');
-      template = await viteServer.transformIndexHtml(url, template);
-      const html = template.split(`<!--ssr-->`);
-      const { renderApp } = await viteServer.ssrLoadModule('/src/serverApp.tsx');
-      const { pipe } = await renderApp(url, {
-        onShellReady() {
-          res.write(html[0]);
-          pipe(res);
-        },
-        onAllReady() {
-          res.write(html[0] + html[1]);
-          res.end();
-        },
-      });
+      let renderAppFunc;
+      if (!isProd) {
+        const { renderApp } = await viteServer.ssrLoadModule('/src/serverApp.tsx');
+        renderAppFunc = renderApp;
+      } else {
+        const { renderApp } = await import(path.resolve('./dist/server/serverApp.js'));
+        renderAppFunc = renderApp;
+      }
+      await renderAppFunc(url, res);
     } catch (error: unknown) {
-      viteServer.ssrFixStacktrace(error as Error);
-      next(error);
+      if (!isProd) {
+        viteServer.ssrFixStacktrace(error as Error);
+        next(error);
+      } else {
+        console.log(error);
+        res.status(500).end(error);
+      }
     }
   });
 
   app.listen(PORT, () => console.log(`App is listening on the http://localhost:${PORT}/`));
-}
+};
 
 createServer();

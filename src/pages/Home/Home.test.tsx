@@ -5,7 +5,9 @@ import Home from './Home';
 import { server } from 'tests/mocks/server';
 import mockData from 'tests/mocks/mockData';
 import { Provider } from 'react-redux';
-import { store } from 'store/store';
+import configureAppStore from 'store/store';
+
+const store = configureAppStore();
 
 describe('Home test', () => {
   test('render Home page component', () => {

@@ -10,7 +10,7 @@ type ModalProps = {
 
 const Modal: FC<ModalProps> = (props) => {
   const { isModalOpen, closeModal } = props;
-  const character = useAppSelector((state) => state.homePage.character) as ICharacter;
+  const character = useAppSelector((state) => state.homePageSlice.character) as ICharacter;
 
   return (
     <div className={isModalOpen ? 'modal open' : 'modal'} onClick={closeModal} role="modal">

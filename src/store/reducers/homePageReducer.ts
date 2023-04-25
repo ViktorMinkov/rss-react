@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { baseURL, getCharacters } from 'api';
+import { baseURL, getCharacters } from '../../api';
 import { ICharacter } from 'types';
 
 type HomePageType = {

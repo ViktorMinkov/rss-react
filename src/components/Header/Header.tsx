@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import './Header.scss';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, matchPath, useLocation } from 'react-router-dom';
 import { Routes } from 'types';
+import './Header.scss';
 
 const links = [
   { path: Routes.HOME, text: 'Home', title: 'Home Page' },
@@ -12,17 +12,12 @@ const links = [
 const Header: FC = () => {
   const location = useLocation();
 
-  const getCurrentPageTitle = () => {
-    const route = location.pathname;
-    const currLink = links.filter((link) => link.path === route);
-    const title = currLink[0].title;
-    return title;
-  };
+  const currentLink = links.find((link) => matchPath(location.pathname, link.path));
 
   return (
     <header className="header">
       <div className="header__container container">
-        <h2 className="header__logo">{getCurrentPageTitle()}</h2>
+        <h2 className="header__logo">{currentLink?.title}</h2>
         <nav className="header__nav nav">
           <ul className="nav__list">
             {links.map((link, index) => (

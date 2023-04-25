@@ -3,7 +3,9 @@ import { screen, render } from '@testing-library/react';
 import { describe, test, expect } from 'vitest';
 import App from './App';
 import { Provider } from 'react-redux';
-import { store } from 'store/store';
+import configureAppStore from 'store/store';
+
+const store = configureAppStore();
 
 describe('App test', () => {
   beforeEach(() => {

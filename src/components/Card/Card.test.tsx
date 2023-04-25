@@ -4,7 +4,9 @@ import { describe, test, expect } from 'vitest';
 import Card from './Card';
 import mockData from 'tests/mocks/mockData';
 import { Provider } from 'react-redux';
-import { store } from 'store/store';
+import configureAppStore from 'store/store';
+
+const store = configureAppStore();
 
 describe('Card test', () => {
   const testCharacter = mockData.results[0];

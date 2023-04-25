@@ -4,7 +4,9 @@ import { describe, test, expect } from 'vitest';
 import Form from './Form';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
-import { store } from 'store/store';
+import configureAppStore from 'store/store';
+
+const store = configureAppStore();
 
 describe('Form test', () => {
   const testName = 'Viktor';

@@ -8,7 +8,7 @@ import { fetchCharacters } from 'store/reducers/homePageReducer';
 
 const Home = () => {
   const { searchString, characters, isLoading, errorMsg } = useAppSelector(
-    (state) => state.homePage
+    (state) => state.homePageSlice
   );
   const dispatch = useAppDispatch();
 

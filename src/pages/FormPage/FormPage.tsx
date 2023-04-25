@@ -1,11 +1,11 @@
 import Form from 'components/Form';
 import Popup from 'components/Popup';
-import './FormPage.scss';
-import FormCard from 'components/FormCard/FormCard';
+import FormCard from 'components/FormCard';
 import { useAppSelector } from 'store/hooks';
+import './FormPage.scss';
 
 const FormPage = () => {
-  const { characters } = useAppSelector((state) => state.form);
+  const { characters } = useAppSelector((state) => state.formSlice);
 
   return (
     <div className="form-page">
@@ -18,7 +18,7 @@ const FormPage = () => {
           <div className="form-page__cards_empty">No data</div>
         )}
       </div>
-      <Popup text={'Character is created succesfully 👌'} />
+      <Popup text={'Character is created succesfully'} />
     </div>
   );
 };
