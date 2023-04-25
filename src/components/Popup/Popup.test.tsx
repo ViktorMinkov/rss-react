@@ -3,7 +3,7 @@ import { screen, render } from '@testing-library/react';
 import { describe, test, expect } from 'vitest';
 import Popup from './Popup';
 import { Provider } from 'react-redux';
-import configureAppStore from 'store/store';
+import configureAppStore from '@/store/store';
 
 const store = configureAppStore();
 

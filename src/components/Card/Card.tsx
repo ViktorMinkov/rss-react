@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react';
-import { ICharacter } from 'types';
+import { ICharacter } from '@/types';
 import './Card.scss';
-import Modal from 'components/Modal';
-import { useAppDispatch } from 'store/hooks';
-import { fetchCharacterByID } from 'store/reducers/homePageReducer';
+import Modal from '@/components/Modal';
+import { useAppDispatch } from '@/store/hooks';
+import { fetchCharacterByID } from '@/store/reducers/homePageReducer';
 
 type CardProps = {
   key: number;

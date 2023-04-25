@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import './Popup.scss';
-import { useAppSelector } from 'store/hooks';
+import { useAppSelector } from '@/store/hooks';
 
 type PopupProps = {
   text: string;

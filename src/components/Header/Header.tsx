@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { NavLink, matchPath, useLocation } from 'react-router-dom';
-import { Routes } from 'types';
+import { Routes } from '@/types';
 import './Header.scss';
 
 const links = [

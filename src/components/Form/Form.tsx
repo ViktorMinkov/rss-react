@@ -1,17 +1,16 @@
-import InputCheckbox from 'components/InputCheckbox';
-import InputDate from 'components/InputDate';
-import InputImage from 'components/InputImage';
-import InputRadio from 'components/InputRadio';
-import InputSelect from 'components/InputSelect';
-import InputText from 'components/InputText';
+import InputCheckbox from '@/components/InputCheckbox';
+import InputDate from '@/components/InputDate';
+import InputImage from '@/components/InputImage';
+import InputRadio from '@/components/InputRadio';
+import InputSelect from '@/components/InputSelect';
+import InputText from '@/components/InputText';
 import React, { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types/form';
-import { ICharacter, IFormData } from 'types';
-import { setCharacters, togglePopup } from 'store/reducers/formReducer';
-
+import { ICharacter, IFormData } from '@/types';
+import { setCharacters, togglePopup } from '@/store/reducers/formReducer';
+import { useAppDispatch } from '@/store/hooks';
 import './Form.scss';
-import { useAppDispatch } from 'store/hooks';
 
 const speciesOptions = ['Choose species', 'Human', 'Alien', 'Robot'];
 const statusOptions = ['Choose status', 'Alive', 'Dead'];

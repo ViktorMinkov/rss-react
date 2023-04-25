@@ -2,12 +2,12 @@ import React, { FC } from 'react';
 import { Provider } from 'react-redux';
 import { renderToPipeableStream } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
-import configureAppStore, { RootState } from './store/store';
+import configureAppStore, { RootState } from '@/store/store';
 import { Response } from 'express';
-import { getCharacters } from './api';
-import { ICharacter } from 'types';
-import { PreloadedState } from '@reduxjs/toolkit';
+import { getCharacters } from '@/api';
+import { ICharacter } from '@/types';
 import App from './App';
+import * as toolkitRaw from '@reduxjs/toolkit';
 
 const preloadCardsApi = async (callback: (preloadResult: ICharacter[]) => void) => {
   const characters = await getCharacters();
@@ -18,7 +18,7 @@ const isProd = process.env.NODE_ENV === 'production';
 
 export const renderApp = async (url: string, res: Response) => {
   preloadCardsApi((result) => {
-    const preloadedState: PreloadedState<RootState> = {
+    const preloadedState: toolkitRaw.PreloadedState<RootState> = {
       homePageSlice: {
         searchString: '',
         characters: result || [],
@@ -64,6 +64,11 @@ const RenderFullPage: FC<RenderFullPageType> = (props) => {
   return (
     <html lang="en">
       <head>
+        <meta charSet="UTF-8" />
+        <link rel="icon" type="image/png" href="/rick-morty-logo.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+        {isProd && <link rel="stylesheet" href="./assets/clientApp.css" />}
         <title>RSS React</title>
       </head>
       <body>

@@ -1,4 +1,4 @@
-import { ICharacter } from 'types';
+import { ICharacter } from '@/types';
 
 export const baseURL = 'https://rickandmortyapi.com/api/character';
 

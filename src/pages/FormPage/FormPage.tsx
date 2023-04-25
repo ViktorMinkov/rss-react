@@ -1,7 +1,7 @@
-import Form from 'components/Form';
-import Popup from 'components/Popup';
-import FormCard from 'components/FormCard';
-import { useAppSelector } from 'store/hooks';
+import Form from '@/components/Form';
+import Popup from '@/components/Popup';
+import FormCard from '@/components/FormCard';
+import { useAppSelector } from '@/store/hooks';
 import './FormPage.scss';
 
 const FormPage = () => {

@@ -16,7 +16,11 @@
     "allowJs": false,
     "isolatedModules": true,
     "noEmit": true,
-    "baseUrl": "./src",
+    "types": ["vite/client", "vitest/globals","@testing-library/jest-dom"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+    },
     "outDir": "dist"
   },
   "include": ["./src/**/*", "styled.d.ts"],

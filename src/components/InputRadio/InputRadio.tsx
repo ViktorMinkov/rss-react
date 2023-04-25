@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Path, UseFormRegister } from 'react-hook-form/dist/types';
-import { IFormData } from 'types';
+import { IFormData } from '@/types';
 
 type InputRadioProps = {
   title: string;

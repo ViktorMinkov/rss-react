@@ -1,6 +1,6 @@
-import Card from 'components/Card';
 import React, { FC } from 'react';
-import { ICharacter } from 'types';
+import Card from '@/components/Card';
+import { ICharacter } from '@/types';
 
 type CardListProps = {
   characters: ICharacter[];

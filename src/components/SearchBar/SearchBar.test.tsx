@@ -4,7 +4,7 @@ import { describe, test, expect } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import SearchBar from './SearchBar';
 import { Provider } from 'react-redux';
-import configureAppStore from 'store/store';
+import configureAppStore from '@/store/store';
 
 const store = configureAppStore();
 

@@ -1,4 +1,4 @@
-import { baseURL } from 'api';
+import { baseURL } from '@/api';
 import { rest } from 'msw';
 import mockData from './mockData';
 

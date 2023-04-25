@@ -1,10 +1,10 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
-import { describe, test, expect } from 'vitest';
-import App from './App';
+import { describe, test, expect, beforeEach } from 'vitest';
 import { Provider } from 'react-redux';
-import configureAppStore from 'store/store';
+import configureAppStore from '@/store/store';
 import { BrowserRouter } from 'react-router-dom';
+import App from '@/App';
 
 const store = configureAppStore();
 

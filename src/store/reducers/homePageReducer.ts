@@ -1,6 +1,9 @@
-import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import * as toolkitRaw from '@reduxjs/toolkit';
+type TypeToolkitRaw = typeof toolkitRaw & { default?: unknown };
+const { createAsyncThunk, createSlice } = ((toolkitRaw as TypeToolkitRaw).default ??
+  toolkitRaw) as typeof toolkitRaw;
 import { baseURL, getCharacters } from '../../api';
-import { ICharacter } from 'types';
+import { ICharacter } from '@/types';
 
 type HomePageType = {
   searchString: string;
@@ -46,7 +49,7 @@ export const homePageSlice = createSlice({
   name: 'homePage',
   initialState,
   reducers: {
-    setSearchString: (state, action: PayloadAction<string>) => {
+    setSearchString: (state, action: toolkitRaw.PayloadAction<string>) => {
       state.searchString = action.payload;
     },
   },

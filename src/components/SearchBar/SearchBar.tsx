@@ -1,7 +1,7 @@
 import React, { FC, useRef } from 'react';
 import './SearchBar.scss';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { setSearchString } from 'store/reducers/homePageReducer';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { setSearchString } from '@/store/reducers/homePageReducer';
 
 const SearchBar: FC = () => {
   const searchString = useAppSelector((state) => state.homePageSlice.searchString);

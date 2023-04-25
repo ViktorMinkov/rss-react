@@ -1,6 +1,9 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import homePageSlice from './reducers/homePageReducer';
 import formSlice from './reducers/formReducer';
+import * as toolkitRaw from '@reduxjs/toolkit';
+type TypeToolkitRaw = typeof toolkitRaw & { default?: unknown };
+const { configureStore, combineReducers } = ((toolkitRaw as TypeToolkitRaw).default ??
+  toolkitRaw) as typeof toolkitRaw;
 
 const rootReducer = combineReducers({
   homePageSlice,

@@ -4,7 +4,7 @@ import { describe, test, expect, vi } from 'vitest';
 import FormPage from './FormPage';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
-import configureAppStore from 'store/store';
+import configureAppStore from '@/store/store';
 
 const store = configureAppStore();
 

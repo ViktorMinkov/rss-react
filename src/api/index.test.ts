@@ -1,4 +1,4 @@
-import { getCharacters } from 'api';
+import { getCharacters } from '@/api';
 import { describe, test, expect } from 'vitest';
 
 describe('Api func', () => {

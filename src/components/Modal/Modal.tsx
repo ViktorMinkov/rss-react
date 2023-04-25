@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { ICharacter } from 'types';
+import { ICharacter } from '@/types';
 import './Modal.scss';
-import { useAppSelector } from 'store/hooks';
+import { useAppSelector } from '@/store/hooks';
 
 type ModalProps = {
   isModalOpen: boolean;

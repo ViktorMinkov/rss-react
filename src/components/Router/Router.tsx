@@ -1,7 +1,7 @@
-import About from 'pages/About';
-import ErrorPage from 'pages/ErrorPage';
-import FormPage from 'pages/FormPage';
-import Home from 'pages/Home';
+import About from '@/pages/About';
+import ErrorPage from '@/pages/ErrorPage';
+import FormPage from '@/pages/FormPage';
+import Home from '@/pages/Home';
 import { Route, Routes } from 'react-router-dom';
 
 const Router = () => {

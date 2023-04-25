@@ -1,10 +1,10 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
-import { describe, test, expect } from 'vitest';
+import { describe, test, expect, beforeEach } from 'vitest';
 import Card from './Card';
-import mockData from 'tests/mocks/mockData';
+import mockData from '@/tests/mocks/mockData';
 import { Provider } from 'react-redux';
-import configureAppStore from 'store/store';
+import configureAppStore from '@/store/store';
 
 const store = configureAppStore();
 

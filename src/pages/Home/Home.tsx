@@ -1,10 +1,10 @@
-import CardList from 'components/CardList';
-import SearchBar from 'components/SearchBar';
+import CardList from '@/components/CardList';
+import SearchBar from '@/components/SearchBar';
 import React, { useEffect } from 'react';
 import './Home.scss';
-import Loader from 'components/Loader';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { fetchCharacters } from 'store/reducers/homePageReducer';
+import Loader from '@/components/Loader';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { fetchCharacters } from '@/store/reducers/homePageReducer';
 
 const Home = () => {
   const { searchString, characters, isLoading, errorMsg } = useAppSelector(
