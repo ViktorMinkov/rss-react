@@ -9,7 +9,7 @@ const FormPage = () => {
 
   return (
     <div className="form-page">
-      <h1 className="form-page__title">Form page</h1>
+      <h1 className="form-page__title">Form Page</h1>
       <Form />
       <div className="form-page__cards">
         {characters.length > 0 ? (

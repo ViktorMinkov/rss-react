@@ -34,3 +34,14 @@
     }
   }
 }
+
+@media (max-width: 400px) {
+  .header {
+    &__logo {
+      font-size: 2rem;
+    }
+    &__nav {
+      font-size: 1.6rem;
+    }
+  }
+}

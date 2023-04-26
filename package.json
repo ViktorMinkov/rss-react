@@ -17,7 +17,9 @@
     "prettier": "prettier src --check",
     "prettier:fix": "prettier src --write",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
@@ -44,6 +46,7 @@
     "@vitejs/plugin-react": "^3.1.0",
     "@vitest/coverage-c8": "^0.29.3",
     "cross-env": "^7.0.3",
+    "cypress": "^12.10.0",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.7.0",
     "eslint-import-resolver-typescript": "^3.5.3",

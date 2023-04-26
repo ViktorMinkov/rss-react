@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Cypress test
+/cypress/downloads
+/cypress/screenshots
+/cypress/videos
+/coverage/
+/instrumented/
+/.nyc_output
