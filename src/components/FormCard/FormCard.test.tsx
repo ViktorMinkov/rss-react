@@ -2,7 +2,7 @@ import React from 'react';
 import { screen, render } from '@testing-library/react';
 import { describe, test, expect } from 'vitest';
 import Card from './FormCard';
-import mockData from 'tests/mocks/mockData';
+import mockData from '@/tests/mocks/mockData';
 
 const testCharacter = mockData.results[0];
 

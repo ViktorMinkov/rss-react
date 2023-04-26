@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { UseFormRegister, Path } from 'react-hook-form';
-import { IFormData } from 'types';
+import { IFormData } from '@/types';
 
 type InputDateProps = {
   title: string;

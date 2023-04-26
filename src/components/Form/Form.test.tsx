@@ -1,10 +1,12 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
-import { describe, test, expect } from 'vitest';
+import { describe, test, expect, beforeEach } from 'vitest';
 import Form from './Form';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
-import { store } from 'store/store';
+import configureAppStore from '@/store/store';
+
+const store = configureAppStore();
 
 describe('Form test', () => {
   const testName = 'Viktor';

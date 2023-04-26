@@ -1,5 +1,7 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { ICharacter } from 'types';
+import * as toolkitRaw from '@reduxjs/toolkit';
+type TypeToolkitRaw = typeof toolkitRaw & { default?: unknown };
+const { createSlice } = ((toolkitRaw as TypeToolkitRaw).default ?? toolkitRaw) as typeof toolkitRaw;
+import { ICharacter } from '@/types';
 
 type FormType = {
   characters: ICharacter[];
@@ -15,10 +17,10 @@ export const formSlice = createSlice({
   name: 'form',
   initialState,
   reducers: {
-    setCharacters: (state, action: PayloadAction<ICharacter>) => {
+    setCharacters: (state, action: toolkitRaw.PayloadAction<ICharacter>) => {
       state.characters.push(action.payload);
     },
-    togglePopup: (state, action: PayloadAction<boolean>) => {
+    togglePopup: (state, action: toolkitRaw.PayloadAction<boolean>) => {
       state.isPopupOpen = action.payload;
     },
   },

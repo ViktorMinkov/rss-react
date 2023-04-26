@@ -1,9 +1,8 @@
-import React, { FC, useState } from 'react';
-import { ICharacter } from 'types';
+import React, { FC } from 'react';
+import { ICharacter } from '@/types';
 import './Card.scss';
-import Modal from 'components/Modal';
-import { useAppDispatch } from 'store/hooks';
-import { fetchCharacterByID } from 'store/reducers/homePageReducer';
+import { useAppDispatch } from '@/store/hooks';
+import { fetchCharacterByID, setIsModalOpen } from '@/store/reducers/homePageReducer';
 
 type CardProps = {
   key: number;
@@ -11,15 +10,11 @@ type CardProps = {
 };
 const Card: FC<CardProps> = (props) => {
   const { character } = props;
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useAppDispatch();
 
   const openModal = () => {
     dispatch(fetchCharacterByID(character.id));
-    setIsModalOpen(true);
-  };
-  const closeModal = () => {
-    setIsModalOpen(false);
+    dispatch(setIsModalOpen(true));
   };
 
   return (
@@ -30,7 +25,6 @@ const Card: FC<CardProps> = (props) => {
         </div>
         <h3 className="card__name">{character.name}</h3>
       </div>
-      <Modal isModalOpen={isModalOpen} closeModal={closeModal} />
     </>
   );
 };

@@ -1,13 +1,18 @@
-import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { baseURL, getCharacters } from 'api';
-import { ICharacter } from 'types';
+import * as toolkitRaw from '@reduxjs/toolkit';
+type TypeToolkitRaw = typeof toolkitRaw & { default?: unknown };
+const { createAsyncThunk, createSlice } = ((toolkitRaw as TypeToolkitRaw).default ??
+  toolkitRaw) as typeof toolkitRaw;
+import { getCharacters } from '../../api';
+import { ICharacter } from '@/types';
+import { baseURL, emptyCharacter } from '@/constants';
 
 type HomePageType = {
   searchString: string;
   characters: ICharacter[];
   isLoading: boolean;
   errorMsg: string;
-  character: ICharacter | object;
+  character: ICharacter;
+  isModalOpen: boolean;
 };
 
 const initialState: HomePageType = {
@@ -15,7 +20,8 @@ const initialState: HomePageType = {
   characters: [],
   isLoading: false,
   errorMsg: '',
-  character: {},
+  character: emptyCharacter,
+  isModalOpen: false,
 };
 
 export const fetchCharacters = createAsyncThunk(
@@ -46,8 +52,11 @@ export const homePageSlice = createSlice({
   name: 'homePage',
   initialState,
   reducers: {
-    setSearchString: (state, action: PayloadAction<string>) => {
+    setSearchString: (state, action: toolkitRaw.PayloadAction<string>) => {
       state.searchString = action.payload;
+    },
+    setIsModalOpen: (state, action: toolkitRaw.PayloadAction<boolean>) => {
+      state.isModalOpen = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -70,5 +79,5 @@ export const homePageSlice = createSlice({
   },
 });
 
-export const { setSearchString } = homePageSlice.actions;
+export const { setSearchString, setIsModalOpen } = homePageSlice.actions;
 export default homePageSlice.reducer;

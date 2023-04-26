@@ -29,13 +29,8 @@ export interface IFormData {
   agreement: boolean;
 }
 
-// export interface IApiResponse {
-//   info: {
-//     count: number;
-//     next: string | null;
-//     pages: number;
-//     prev: string | null;
-//   };
-//   results: ICharacter[];
-//   error?: string;
-// }
+export enum Routes {
+  HOME = '/',
+  ABOUT = '/about',
+  FORMS = '/forms',
+}

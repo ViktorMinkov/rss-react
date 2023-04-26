@@ -8,18 +8,9 @@ describe('Header test', () => {
   test('render Header component', () => {
     render(
       <BrowserRouter>
-        <Header title="Header" />
+        <Header />
       </BrowserRouter>
     );
-    expect(screen.getByText(/header/i)).toBeInTheDocument();
     expect(screen.getAllByRole('link').length).toBe(3);
-  });
-  test('render Header without title', () => {
-    render(
-      <BrowserRouter>
-        <Header title="" />
-      </BrowserRouter>
-    );
-    expect(screen.queryByText(/header/i)).toBeNull();
   });
 });

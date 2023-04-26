@@ -2,9 +2,11 @@ import React from 'react';
 import { screen, render } from '@testing-library/react';
 import { describe, test, expect } from 'vitest';
 import CardList from './CardList';
-import mockData from 'tests/mocks/mockData';
+import mockData from '@/tests/mocks/mockData';
 import { Provider } from 'react-redux';
-import { store } from 'store/store';
+import configureAppStore from '@/store/store';
+
+const store = configureAppStore();
 
 describe('CardList test', () => {
   test('render CardList component', () => {

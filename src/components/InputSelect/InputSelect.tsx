@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { UseFormRegister } from 'react-hook-form/dist/types/form';
 import { Path } from 'react-hook-form/dist/types/path';
-import { IFormData } from 'types';
+import { IFormData } from '@/types';
 
 type InputSelectProps = {
   title: string;

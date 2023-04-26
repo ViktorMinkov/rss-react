@@ -1,16 +1,15 @@
 import React, { FC } from 'react';
-import { ICharacter } from 'types';
 import './Modal.scss';
-import { useAppSelector } from 'store/hooks';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { setIsModalOpen } from '@/store/reducers/homePageReducer';
 
-type ModalProps = {
-  isModalOpen: boolean;
-  closeModal: () => void;
-};
+const Modal: FC = () => {
+  const { character, isModalOpen } = useAppSelector((state) => state.homePageSlice);
+  const dispatch = useAppDispatch();
 
-const Modal: FC<ModalProps> = (props) => {
-  const { isModalOpen, closeModal } = props;
-  const character = useAppSelector((state) => state.homePage.character) as ICharacter;
+  const closeModal = () => {
+    dispatch(setIsModalOpen(false));
+  };
 
   return (
     <div className={isModalOpen ? 'modal open' : 'modal'} onClick={closeModal} role="modal">
