@@ -5,11 +5,16 @@ import { defineConfig } from 'vite';
 import { configDefaults } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import istanbul from 'vite-plugin-istanbul';
 import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react({ fastRefresh: false }), tsconfigPaths()],
+  plugins: [
+    react({ fastRefresh: false }),
+    tsconfigPaths(),
+    istanbul({ requireEnv: false, cypress: true }),
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

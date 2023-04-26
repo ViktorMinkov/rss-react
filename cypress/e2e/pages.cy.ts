@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 describe('pages renders', () => {
   const testData = {
     home: 'Home Page',

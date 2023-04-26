@@ -1,11 +1,13 @@
 import { defineConfig } from 'cypress';
+import cypressCoverage from '@cypress/code-coverage/task';
 
 export default defineConfig({
   e2e: {
-    baseUrl: 'http://localhost:3001',
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      cypressCoverage(on, config);
+      return config;
     },
+    baseUrl: 'http://localhost:3001',
   },
   pageLoadTimeout: 80000,
   screenshotOnRunFailure: false,

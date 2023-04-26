@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 describe('searchBar', () => {
   beforeEach(() => cy.visit('/'));
   it('works and render card correctly', () => {

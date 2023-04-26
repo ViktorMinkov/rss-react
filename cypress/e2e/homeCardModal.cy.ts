@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 describe('Card Modal', () => {
   beforeEach(() => {
     cy.visit('/');
